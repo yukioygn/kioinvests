@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kio Invests</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e6e0;
+      font-family: 'Georgia', serif;
+      line-height: 1.7;
+    }
+
+    .hero-billboard {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+
+    .billboard-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .billboard-overlay {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .scroll-down {
+      color: rgba(255,255,255,0.3);
+      font-family: sans-serif;
+      font-size: 1.4rem;
+      text-decoration: none;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.7; }
+    }
+
+    nav {
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: #e8e6e0;
+      text-decoration: none;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #e8e6e0; }
+
+    .hero {
+      padding: 8rem 4rem 6rem;
+      max-width: 800px;
+    }
+
+    .hero-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #e8e6e0;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.55);
+      max-width: 540px;
+      line-height: 1.8;
+    }
+
+    .cases-section {
+      padding: 4rem;
+      border-top: 0.5px solid rgba(255,255,255,0.08);
+    }
+
+    .section-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .case-card {
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .case-card:hover {
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .case-ticker {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.4rem;
+    }
+
+    .case-name {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .case-desc {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .case-return {
+      text-align: right;
+    }
+
+    .return-number {
+      font-family: sans-serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #7eb87e;
+    }
+
+    .return-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero-billboard">
+    <img src="land.png" alt="Kio Invests — Patient capital. Uncommon stillness." class="billboard-img">
+    <div class="billboard-overlay">
+      <a href="#main" class="scroll-down">↓</a>
+    </div>
+  </section>
+
+  <div id="main">
+
+    <nav>
+      <a href="/" class="logo">KIO INVESTS</a>
+      <div>
+        <a href="#">Cases</a>
+        <a href="#">About</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <p class="hero-label">Investment Research</p>
+      <h1>Contrarian value,<br>documented in real time.</h1>
+      <p>A record of how I think — the thesis, the entry, the exit, and what the market got wrong.</p>
+    </section>
+
+    <section class="cases-section">
+      <p class="section-label">Case Studies</p>
+
+      <a class="case-card" href="soc.html">
+        <div>
+          <p class="case-ticker">SOC · 2025–2026</p>
+          <p class="case-name">Sable Offshore Corp</p>
+          <p class="case-desc">Regulatory overhang misread as operational failure</p>
+        </div>
+        <div class="case-return">
+          <p class="return-number">+218%</p>
+          <p class="return-label">return</p>
+        </div>
+      </a>
+
+      <a class="case-card" href="#">
+        <div>
+          <p class="case-ticker">GOOGL · 2025</p>
+          <p class="case-name">Alphabet</p>
+          <p class="case-desc">Liberation Day selloff created a generational entry point</p>
+        </div>
+        <div class="case-return">
+          <p class="return-number">+100%</p>
+          <p class="return-label">return</p>
+        </div>
+      </a>
+
+      <a class="case-card" href="#">
+        <div>
+          <p class="case-ticker">EWBC · 2023</p>
+          <p class="case-name">EastWest Bancorp</p>
+          <p class="case-desc">SVB crisis created indiscriminate regional bank selling</p>
+        </div>
+        <div class="case-return">
+          <p class="return-number">+60%</p>
+          <p class="return-label">return</p>
+        </div>
+      </a>
+
+    </section>
+
+  </div>
+
+</body>
+</html>
