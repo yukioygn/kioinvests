@@ -3,248 +3,596 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kio Invests</title>
+  <title>Kio Invests — Patient capital. Uncommon stillness.</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    @font-face {
+      font-family: 'HanyiSenty';
+      src: url('Hanyi Senty Vimalakirti Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #e8e6e0;
+      --text-muted: rgba(232,230,224,0.45);
+      --text-dim: rgba(232,230,224,0.25);
+      --border: rgba(255,255,255,0.08);
+      --border-light: rgba(255,255,255,0.1);
+      --green: #7eb87e;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --serif: 'Georgia', serif;
+      --sans: system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background: #0a0a0a;
-      color: #e8e6e0;
-      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
       line-height: 1.7;
     }
 
-    .hero-billboard {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: #0a0a0a;
-    }
-
-    .billboard-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .billboard-overlay {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .scroll-down {
-      color: rgba(255,255,255,0.3);
-      font-family: sans-serif;
-      font-size: 1.4rem;
-      text-decoration: none;
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.7; }
-    }
-
-    nav {
+    /* ── Navigation ── */
+    .nav {
       padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 0.5px solid rgba(255,255,255,0.1);
+      border-bottom: 0.5px solid var(--border-light);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--bg);
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
-    .logo {
+    .nav.visible { opacity: 1; }
+
+    .nav-logo {
+      font-family: var(--sans);
       font-size: 1.1rem;
       letter-spacing: 0.08em;
-      color: #e8e6e0;
+      color: var(--text);
       text-decoration: none;
     }
 
-    nav a {
-      color: rgba(255,255,255,0.5);
+    .nav-links a {
+      color: var(--text-muted);
       text-decoration: none;
-      font-family: sans-serif;
+      font-family: var(--sans);
       font-size: 0.85rem;
       letter-spacing: 0.05em;
       margin-left: 2rem;
       transition: color 0.2s;
     }
 
-    nav a:hover { color: #e8e6e0; }
-
+    .nav-links a:hover { color: var(--text); }
+    
+    /* ── Hero ── */
     .hero {
-      padding: 8rem 4rem 6rem;
-      max-width: 800px;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .hero-label {
-      font-family: sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.35);
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0) brightness(0.45);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-brand {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: rgba(232,230,224,0.55);
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
 
-    .hero h1 {
-      font-size: 3.2rem;
+    .hero-character {
+      font-family: 'HanyiSenty', serif;
+      font-size: clamp(8rem, 18vw, 16rem);
       font-weight: 400;
-      line-height: 1.2;
+      line-height: 1;
+      color: var(--text);
       margin-bottom: 1.5rem;
-      color: #e8e6e0;
+      text-shadow: 0 0 80px rgba(0,0,0,0.5);
     }
 
-    .hero p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.55);
-      max-width: 540px;
-      line-height: 1.8;
-    }
-
-    .cases-section {
-      padding: 4rem;
-      border-top: 0.5px solid rgba(255,255,255,0.08);
-    }
-
-    .section-label {
-      font-family: sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      font-style: italic;
+      color: rgba(232,230,224,0.6);
+      letter-spacing: 0.02em;
       margin-bottom: 3rem;
     }
 
-    .case-card {
-      border: 0.5px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 2rem 2.5rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+    .hero-cta {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
       text-decoration: none;
-      color: inherit;
+      border: 0.5px solid rgba(232,230,224,0.4);
+      padding: 0.9rem 2.5rem;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
 
-    .case-card:hover {
-      border-color: rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.02);
+    .hero-cta:hover {
+      background: rgba(232,230,224,0.08);
+      border-color: rgba(232,230,224,0.8);
     }
 
-    .case-ticker {
-      font-family: sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 0.4rem;
+    /* ── Eyebrow labels ── */
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 1rem;
     }
 
-    .case-name {
-      font-size: 1.3rem;
+    /* ── Fade in on scroll ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.85s var(--ease-out),
+                  transform 0.85s var(--ease-out);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Tortoise Collection ── */
+    .tortoise-section {
+      background: #0a0a0a;
+      padding: 0;
+    }
+
+    .tortoise-grid {
+      display: flex;
+      width: 100%;
+      height: 45vh;
+    }
+
+    .tortoise-cell {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0a;
+    }
+
+    .tortoise-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: grayscale(1);
+    }
+
+    .tortoise-cell:nth-child(1) img {
+      width: 120%;
+      height: 120%;
+    }
+
+    .tortoise-cell:nth-child(2) img {
+      width: 70%;
+      height: 70%;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    .tortoise-cell:nth-child(5) img {
+      width: 80%;
+      height: 80%;
+    }
+
+    /* ── Philosophy ── */
+    .philosophy-section {
+      border-top: 0.5px solid var(--border);
+      padding-top: 10vh;
+    }
+
+    .philosophy-header {
+      padding: 0 4rem 6vh;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 0.5px solid var(--border);
+    }
+
+    .pillar {
+      padding: 4rem;
+      border-right: 0.5px solid var(--border);
+      position: relative;
+    }
+
+    .pillar:last-child { border-right: none; }
+
+    .pillar-num {
+      font-family: var(--sans);
+      font-size: 3.0rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 2.5rem;
+      display: block;
+    }
+
+    .pillar-title {
+      font-size: clamp(1.8rem, 2.2vw, 2.4rem);
       font-weight: 400;
-      margin-bottom: 0.4rem;
+      font-style: italic;
+      line-height: 1.15;
+      margin-bottom: 1.8rem;
+      color: rgba(232,230,224,0.6);
+      transition: color 0.6s ease;
     }
 
-    .case-desc {
-      font-family: sans-serif;
+    .pillar:hover .pillar-title { color: #ffffff; }
+
+    .pillar-rule {
+      width: 2.5rem;
+      height: 0.5px;
+      background: rgba(255,255,255,0.2);
+      margin-bottom: 1.8rem;
+      transition: width 0.7s var(--ease-out), background 0.6s ease;
+    }
+
+    .pillar:hover .pillar-rule {
+      width: 5rem;
+      background: rgba(255,255,255,0.6);
+    }
+
+    .pillar-body {
+      font-family: var(--serif);
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(232,230,224,0.38);
+      text-align: justify;
+      transition: color 0.6s ease;
+    }
+
+    .pillar:hover .pillar-body { color: rgba(232,230,224,0.75); }
+
+    /* ── Case Studies Carousel ── */
+    .cases-section {
+      border-top: 0.5px solid var(--border);
+      padding-top: 10vh;
+    }
+
+    .cases-header {
+      padding: 0 4rem 4vh;
+    }
+
+    .carousel-wrap {
+      overflow-x: auto;
+      display: flex;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .carousel-wrap::-webkit-scrollbar { display: none; }
+
+    .case-card {
+      flex: 0 0 33.333vw;
+      height: 65vh;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .case-card:last-child {
+      flex: 0 0 28vw;
+    }
+
+    .case-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.55);
+      transition: filter 0.6s ease, transform 0.8s var(--ease-out);
+    }
+
+    .case-card:hover img {
+      filter: saturate(0.75);
+      transform: scale(1.03);
+    }
+
+    .case-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 55%);
+    }
+
+    .case-card-content {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      right: 2.5rem;
+    }
+
+    .case-card-ticker {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: rgba(232,230,224,0.45);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .case-card-name {
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .case-card-desc {
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      color: rgba(232,230,224,0.5);
+      line-height: 1.5;
+    }
+
+    /* ── Lineage ── */
+    .lineage-section {
+      padding: 12vh 4rem;
+      text-align: center;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .lineage-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.85;
+    }
+
+    /* ── Invitation ── */
+    .invitation-section {
+      padding: 10vh 4rem 14vh;
+      text-align: center;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .invitation-headline {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+    }
+
+    .invitation-contact {
+      font-family: var(--sans);
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--border-light);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
     }
 
-    .case-return {
-      text-align: right;
+    .invitation-contact:hover {
+      color: var(--text);
+      border-color: var(--text);
     }
 
-    .return-number {
-      font-family: sans-serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: #7eb87e;
-    }
-
-    .return-label {
-      font-family: sans-serif;
+    /* ── Footer ── */
+    .site-footer {
+      padding: 2rem 4rem;
+      border-top: 0.5px solid var(--border);
+      font-family: var(--sans);
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar { border-right: none; border-bottom: 0.5px solid var(--border); padding: 3rem 2rem; }
+      .nav { padding: 1.5rem 2rem; }
+      .case-card { flex: 0 0 80vw; }
+      .case-card:last-child { flex: 0 0 70vw; }
+      .philosophy-header { padding: 0 2rem 6vh; }
+      .cases-header { padding: 0 2rem 4vh; }
     }
   </style>
 </head>
 <body>
 
-  <section class="hero-billboard">
-    <img src="land.png" alt="Kio Invests — Patient capital. Uncommon stillness." class="billboard-img">
-    <div class="billboard-overlay">
-      <a href="#main" class="scroll-down">↓</a>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="/" class="nav-logo">KIO INVESTS</a>
+    <div class="nav-links">
+      <a href="#cases">Cases</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="rocks.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-brand">Kio Invests</p>
+      <h1 class="hero-character">靜</h1>
+      <p class="hero-tagline">Patient Capital | Uncommon Stillness</p>
+      <a href="#contact" class="hero-cta">Inquire</a>
     </div>
   </section>
 
-  <div id="main">
+  <!-- Tortoise Collection -->
+  <section class="tortoise-section">
+    <div class="tortoise-grid">
+      <div class="tortoise-cell"><img src="tt1.png" alt="Black Tortoise artifact 1"></div>
+      <div class="tortoise-cell"><img src="tt2.png" alt="Black Tortoise artifact 2"></div>
+      <div class="tortoise-cell"><img src="tt3.png" alt="Black Tortoise artifact 3"></div>
+      <div class="tortoise-cell"><img src="tt4.png" alt="Black Tortoise artifact 4"></div>
+      <div class="tortoise-cell"><img src="tt5.png" alt="Black Tortoise artifact 5"></div>
+    </div>
+  </section>
 
-    <nav>
-      <a href="/" class="logo">KIO INVESTS</a>
-      <div>
-        <a href="#">Cases</a>
-        <a href="#">About</a>
+  <!-- Philosophy -->
+  <section class="philosophy-section">
+    <div class="philosophy-header">
+      <span class="eyebrow">Investment Philosophy</span>
+    </div>
+    <div class="pillars-grid">
+
+      <div class="pillar fade-in">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-title">Variant<br>Perception</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">The market prices consensus. Edge lives in the gap between what is widely believed and what is actually true. Every position begins with one question: what do we see that others don't — and why are we right?</p>
       </div>
-    </nav>
 
-    <section class="hero">
-      <p class="hero-label">Investment Research</p>
-      <h1>Contrarian value,<br>documented in real time.</h1>
-      <p>A record of how I think — the thesis, the entry, the exit, and what the market got wrong.</p>
-    </section>
+      <div class="pillar fade-in" style="transition-delay: 0.15s;">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-title">Patient<br>Capital</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">Time is the mechanism through which the market corrects its own errors. We do not trade. We own. The willingness to hold through discomfort — while others capitulate — is not a temperamental quirk. It is the strategy.</p>
+      </div>
 
-    <section class="cases-section">
-      <p class="section-label">Case Studies</p>
+      <div class="pillar fade-in" style="transition-delay: 0.30s;">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-title">Asymmetric<br>Risk</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-body">The goal is never to avoid risk. It is to find situations where the downside is bounded and the upside is not. Where heads you win considerably, and tails you don't lose much. That asymmetry, patiently sought, is the only edge worth having.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="cases-section" id="cases">
+    <div class="cases-header">
+      <span class="eyebrow">Selected Investments</span>
+    </div>
+    <div class="carousel-wrap">
 
       <a class="case-card" href="soc.html">
-        <div>
-          <p class="case-ticker">SOC · 2025–2026</p>
-          <p class="case-name">Sable Offshore Corp</p>
-          <p class="case-desc">Regulatory overhang misread as operational failure</p>
-        </div>
-        <div class="case-return">
-          <p class="return-number">+218%</p>
-          <p class="return-label">return</p>
+        <img src="soc1.jpg" alt="Sable Offshore Corp">
+        <div class="case-card-overlay"></div>
+        <div class="case-card-content">
+          <p class="case-card-ticker">SOC · Equities · 2025–2026</p>
+          <p class="case-card-name">Sable Offshore Corp</p>
+          <p class="case-card-desc">Regulatory overhang misread as permanent impairment</p>
         </div>
       </a>
 
       <a class="case-card" href="#">
-        <div>
-          <p class="case-ticker">GOOGL · 2025</p>
-          <p class="case-name">Alphabet</p>
-          <p class="case-desc">Liberation Day selloff created a generational entry point</p>
-        </div>
-        <div class="case-return">
-          <p class="return-number">+100%</p>
-          <p class="return-label">return</p>
+        <img src="soc2.jpg" alt="Alphabet">
+        <div class="case-card-overlay"></div>
+        <div class="case-card-content">
+          <p class="case-card-ticker">GOOGL · Equities · 2025</p>
+          <p class="case-card-name">Alphabet</p>
+          <p class="case-card-desc">Liberation Day selloff created a generational entry point</p>
         </div>
       </a>
 
       <a class="case-card" href="#">
-        <div>
-          <p class="case-ticker">EWBC · 2023</p>
-          <p class="case-name">EastWest Bancorp</p>
-          <p class="case-desc">SVB crisis created indiscriminate regional bank selling</p>
-        </div>
-        <div class="case-return">
-          <p class="return-number">+60%</p>
-          <p class="return-label">return</p>
+        <img src="soc3.jpg" alt="EastWest Bancorp">
+        <div class="case-card-overlay"></div>
+        <div class="case-card-content">
+          <p class="case-card-ticker">EWBC · Equities · 2023</p>
+          <p class="case-card-name">EastWest Bancorp</p>
+          <p class="case-card-desc">SVB crisis created indiscriminate regional bank selling</p>
         </div>
       </a>
 
-    </section>
+    </div>
+  </section>
 
-  </div>
+  <!-- Lineage -->
+  <section class="lineage-section">
+    <p class="lineage-text fade-in">
+      The framework comes from Buffett, Munger, Marks, and Pabrai.<br>
+      The application is our own.
+    </p>
+  </section>
+
+  <!-- Invitation -->
+  <section class="invitation-section">
+    <h2 class="invitation-headline fade-in">For those who think in years.</h2>
+    <a href="mailto:hello@kioinvests.com" class="invitation-contact">hello@kioinvests.com</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    Kio Invests © 2026
+  </footer>
+
+  <script>
+    // Nav appears on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) nav.classList.add('visible');
+      else nav.classList.remove('visible');
+    }, { passive: true });
+
+    // Fade in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+        else entry.target.classList.remove('visible');
+      });
+    }, { threshold: 0.15, rootMargin: '-60px' });
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
