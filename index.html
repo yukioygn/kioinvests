@@ -39,7 +39,7 @@
 
     /* ── Navigation ── */
     .nav {
-      padding: 2rem 4rem;
+      padding: 1rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -72,6 +72,10 @@
       letter-spacing: 0.05em;
       margin-left: 2rem;
       transition: color 0.2s;
+    }
+
+    .nav-links {
+      margin-right: 6rem;
     }
 
     .nav-links a:hover { color: var(--text); }
@@ -859,12 +863,18 @@
   </audio>
 
   <script>
+
     // Nav
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 80) nav.classList.add('visible');
       else nav.classList.remove('visible');
     }, { passive: true });
+
+    document.addEventListener('mousemove', (e) => {
+      if (e.clientY < 80) nav.classList.add('visible');
+      else if (window.scrollY <= 80) nav.classList.remove('visible');
+    });
 
     // Hero video crossfade loop
     const heroA = document.getElementById('heroA');
