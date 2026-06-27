@@ -160,7 +160,7 @@
     /* ── Eyebrow labels ── */
     .eyebrow {
       font-family: var(--sans);
-      font-size: 0.72rem;
+      font-size: 1.2rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-dim);
@@ -185,12 +185,40 @@
     .tortoise-section {
       background: #0a0a0a;
       padding: 0;
+      position: relative;
+      overflow: visible;
+    }
+
+    .tortoise-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 210px;
+      background: linear-gradient(to bottom, #0a0a0a, transparent);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .tortoise-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 300px;
+      background: linear-gradient(to top, rgba(50,50,50,0.85) 0%, rgba(30,30,30,0.4) 50%, transparent 100%);
+      z-index: 10;
+      pointer-events: none;
     }
 
     .tortoise-grid {
       display: flex;
       width: 100%;
       height: 45vh;
+      position: relative;
+      z-index: 2;
     }
 
     .tortoise-cell {
@@ -224,6 +252,97 @@
     .tortoise-cell:nth-child(5) img {
       width: 80%;
       height: 80%;
+    }
+
+    .ink-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ── Tortoise Philosophy ── */
+    .tortoise-philosophy {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 10vh 8rem 10vh 16%;
+      overflow: hidden;
+      gap: 4rem;
+    }
+
+    .waterfall-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: grayscale(1) brightness(0.40);
+      transition: opacity 1.5s ease;
+    }
+
+    .waterfall-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.40);
+      pointer-events: none;
+    }
+
+    .philosophy-text-side {
+      position: relative;
+      z-index: 2;
+      max-width: 540px;
+    }
+
+    .philosophy-body {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      line-height: 1.95;
+      color: rgba(232,230,224,0.85);
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+
+    .philosophy-transition {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(232,230,224,0.55);
+      margin-bottom: 2rem;
+      display: block;
+      text-align: justify;
+    }
+
+    .philosophy-img-side {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 2rem;
+    }
+
+    .philosophy-img-crop {
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+    }
+
+    .philosophy-tortoise-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      display: block;
+      filter: grayscale(1) brightness(0.7) contrast(1.4) opacity(0.85);
+      margin-top: -42%;
+      mix-blend-mode: screen;
     }
 
     /* ── Philosophy ── */
@@ -305,48 +424,57 @@
       padding: 0 4rem 4vh;
     }
 
-    .carousel-wrap {
-      overflow-x: auto;
-      display: flex;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
     }
 
-    .carousel-wrap::-webkit-scrollbar { display: none; }
+    .carousel-track {
+      display: flex;
+      transition: transform 1.5s var(--ease-out);
+      will-change: transform;
+    }
 
     .case-card {
-      flex: 0 0 33.333vw;
-      height: 65vh;
+      flex: 0 0 40vw;
+      height: 55vh;
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      text-decoration: none;
-      display: block;
+      transition: opacity 0.7s ease, transform 0.7s var(--ease-out);
     }
 
-    .case-card:last-child {
-      flex: 0 0 28vw;
+    .case-card.side { opacity: 0.50; }
+    .case-card.active { opacity: 1; }
+    .case-card.hidden { opacity: 0.1; }
+
+    .case-card-img-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
     }
 
-    .case-card img {
+    .case-card-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
       filter: saturate(0.55);
-      transition: filter 0.6s ease, transform 0.8s var(--ease-out);
+      transform: scale(1);
+      transition: transform 6s ease, filter 0.7s ease;
     }
 
-    .case-card:hover img {
-      filter: saturate(0.75);
-      transform: scale(1.03);
+    .case-card.active .case-card-img-wrap img {
+      transform: scale(1.04);
+      filter: saturate(0.7);
     }
 
     .case-card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 55%);
+      background: linear-gradient(to top, rgba(0,0,0,0.81) 0%, transparent 50%);
     }
 
     .case-card-content {
@@ -354,30 +482,78 @@
       bottom: 2.5rem;
       left: 2.5rem;
       right: 2.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .case-card.active .case-card-content {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .case-card-ticker {
       font-family: var(--sans);
       font-size: 0.68rem;
       letter-spacing: 0.15em;
-      color: rgba(232,230,224,0.45);
+      color: rgba(232,230,224,0.8);
       margin-bottom: 0.5rem;
       text-transform: uppercase;
+      display: inline-block;
+      background: rgba(0,0,0,0.6);
+      padding: 0.25rem 0.6rem;
+      backdrop-filter: blur(4px);
     }
 
     .case-card-name {
-      font-size: 1.7rem;
+      font-size: 2.1rem;
       font-weight: 400;
       color: var(--text);
       margin-bottom: 0.5rem;
-      line-height: 1.2;
+      line-height: 2.0;
     }
 
     .case-card-desc {
       font-family: var(--sans);
-      font-size: 0.82rem;
-      color: rgba(232,230,224,0.5);
-      line-height: 1.5;
+      font-size: 0.95rem;
+      color: rgba(232,230,224,0.55);
+      line-height: 1.55;
+      max-width: 100%;
+    }
+
+    /* ── Progress indicator ── */
+    .carousel-progress {
+      padding: 2rem 4rem 0;
+    }
+
+    .progress-track {
+      display: none;
+    }
+
+    .progress-bar {
+      display: none;
+    }
+
+    .progress-tickers {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-ticker {
+      font-family: var(--sans);
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.2);
+      transition: color 0.4s ease;
+      cursor: pointer;
+      padding-bottom: 4px;
+      border-bottom: 0.5px solid transparent;
+      transition: color 0.4s ease, border-color 0.4s ease;
+    }
+
+    .progress-ticker.active {
+      color: rgba(255,255,255,0.7);
+      border-bottom: 0.5px solid rgba(255,255,255,0.5);
     }
 
     /* ── Lineage ── */
@@ -476,13 +652,36 @@
 
   <!-- Tortoise Collection -->
   <section class="tortoise-section">
-    <div class="tortoise-grid">
+        <canvas id="inkCanvas" class="ink-canvas"></canvas>
+        <div class="tortoise-grid">
       <div class="tortoise-cell"><img src="tt1.png" alt="Black Tortoise artifact 1"></div>
       <div class="tortoise-cell"><img src="tt2.png" alt="Black Tortoise artifact 2"></div>
       <div class="tortoise-cell"><img src="tt3.png" alt="Black Tortoise artifact 3"></div>
       <div class="tortoise-cell"><img src="tt4.png" alt="Black Tortoise artifact 4"></div>
       <div class="tortoise-cell"><img src="tt5.png" alt="Black Tortoise artifact 5"></div>
     </div>
+  </section>
+
+  <!-- Black Tortoise Philosophy -->
+  <section class="tortoise-philosophy">
+    <video class="waterfall-bg" id="waterfallA" autoplay muted playsinline>
+      <source src="waterfall1.mp4" type="video/mp4">
+    </video>
+    <video class="waterfall-bg" id="waterfallB" autoplay muted playsinline>
+      <source src="waterfall1.mp4" type="video/mp4">
+    </video>
+    <div class="waterfall-overlay"></div>
+    <div class="philosophy-text-side">
+      <p class="philosophy-body">In the ancient cosmology of Chinese feng shui 風水, the heavens are divided among four celestial guardians — each assigned a direction, a season, a force of nature. And to the north, standing apart from all of them, is 玄武. The Black Tortoise. Not chosen for its speed or strength. Not the dragon's fire. Not the tiger's fury. But for the one quality the others do not possess — the capacity to endure. Wrapped in winter. Rooted in water. Moving only when it chose to move.</p>
+      <p class="philosophy-transition">This is the spirit we carry.</p>
+      <p class="philosophy-body">In markets, as in nature, this quality is the rarest of all. Easily forgotten and dismissed. The most durable advantage is not intelligence, not information, not technology. It is patience. The willingness to sit still while the world moves frantically around you.</p>
+    </div>
+    <div class="philosophy-img-side">
+      <div class="philosophy-img-crop">
+        <img src="tt6.png" alt="Black Tortoise artifact" class="philosophy-tortoise-img">
+      </div>
+    </div>
+  
   </section>
 
   <!-- Philosophy -->
@@ -496,21 +695,21 @@
         <span class="pillar-num">01</span>
         <h3 class="pillar-title">Variant<br>Perception</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">The market prices consensus. Edge lives in the gap between what is widely believed and what is actually true. Every position begins with one question: what do we see that others don't — and why are we right?</p>
+        <p class="pillar-body">The wisdom of crowds is real. So is its madness. Euphoria inflates what reason cannot justify. Panic destroys what fundamentals still support. The opportunity is never in the consensus. It is in what the consensus has chosen not to see.</p>
       </div>
 
       <div class="pillar fade-in" style="transition-delay: 0.15s;">
         <span class="pillar-num">02</span>
         <h3 class="pillar-title">Patient<br>Capital</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">Time is the mechanism through which the market corrects its own errors. We do not trade. We own. The willingness to hold through discomfort — while others capitulate — is not a temperamental quirk. It is the strategy.</p>
+        <p class="pillar-body">Time is the mechanism through which the market corrects its own errors. We do not trade. We own. Our strategy is grounded in the willingness to hold through discomfort while others capitulate. Others will misjudge our temperament and approach.</p>
       </div>
 
       <div class="pillar fade-in" style="transition-delay: 0.30s;">
         <span class="pillar-num">03</span>
         <h3 class="pillar-title">Asymmetric<br>Risk</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-body">The goal is never to avoid risk. It is to find situations where the downside is bounded and the upside is not. Where heads you win considerably, and tails you don't lose much. That asymmetry, patiently sought, is the only edge worth having.</p>
+        <p class="pillar-body">The goal is never to avoid risk. It is to find situations where the downside is bounded and the upside is not. Where heads you win considerably, and tails you don't lose much. That asymmetry, patiently sought, is the only position worth taking.</p>
       </div>
 
     </div>
@@ -521,39 +720,105 @@
     <div class="cases-header">
       <span class="eyebrow">Selected Investments</span>
     </div>
-    <div class="carousel-wrap">
 
-      <a class="case-card" href="soc.html">
-        <img src="soc1.jpg" alt="Sable Offshore Corp">
-        <div class="case-card-overlay"></div>
-        <div class="case-card-content">
-          <p class="case-card-ticker">SOC · Equities · 2025–2026</p>
-          <p class="case-card-name">Sable Offshore Corp</p>
-          <p class="case-card-desc">Regulatory overhang misread as permanent impairment</p>
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="case-card" data-index="0">
+          <div class="case-card-img-wrap">
+            <img src="soc0.jpg" alt="Sable Offshore Corp">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">SOC · Speculation · 2025–2026</p>
+            <p class="case-card-name">Sable Offshore Corp</p>
+            <p class="case-card-desc">Regulatory overhang misread as permanent impairment</p>
+          </div>
         </div>
-      </a>
 
-      <a class="case-card" href="#">
-        <img src="soc2.jpg" alt="Alphabet">
-        <div class="case-card-overlay"></div>
-        <div class="case-card-content">
-          <p class="case-card-ticker">GOOGL · Equities · 2025</p>
-          <p class="case-card-name">Alphabet</p>
-          <p class="case-card-desc">Liberation Day selloff created a generational entry point</p>
+        <div class="case-card" data-index="1">
+          <div class="case-card-img-wrap">
+            <img src="ewb0.png" alt="EastWest Bancorp">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">EWBC · Investment · 2023</p>
+            <p class="case-card-name">EastWest Bancorp</p>
+            <p class="case-card-desc">SVB crisis created indiscriminate regional bank selling</p>
+          </div>
         </div>
-      </a>
 
-      <a class="case-card" href="#">
-        <img src="soc3.jpg" alt="EastWest Bancorp">
-        <div class="case-card-overlay"></div>
-        <div class="case-card-content">
-          <p class="case-card-ticker">EWBC · Equities · 2023</p>
-          <p class="case-card-name">EastWest Bancorp</p>
-          <p class="case-card-desc">SVB crisis created indiscriminate regional bank selling</p>
+        <div class="case-card" data-index="2">
+          <div class="case-card-img-wrap">
+            <img src="nabors0.png" alt="Nabors Industries">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">NBR · Investment</p>
+            <p class="case-card-name">Nabors Industries</p>
+            <p class="case-card-desc">Debt-laden driller entering a supercycle as geopolitical fractures reprice global energy</p>
+          </div>
         </div>
-      </a>
 
+        <div class="case-card" data-index="3">
+          <div class="case-card-img-wrap">
+            <img src="goog0.jpg" alt="Alphabet">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">GOOGL · Investment · 2025</p>
+            <p class="case-card-name">Alphabet</p>
+            <p class="case-card-desc">Liberation Day selloff and panic over AI created a generational entry point</p>
+          </div>
+        </div>
+
+        <div class="case-card" data-index="4">
+          <div class="case-card-img-wrap">
+            <img src="baba0.png" alt="Alibaba">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">BABA · Investment</p>
+            <p class="case-card-name">Alibaba</p>
+            <p class="case-card-desc">State pressure and market panic obscured a global supply chain giant pivoting into AI</p>
+          </div>
+        </div>
+
+        <div class="case-card" data-index="5">
+          <div class="case-card-img-wrap">
+            <img src="lulu0.png" alt="Lululemon">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">LULU · Investment</p>
+            <p class="case-card-name">Lululemon</p>
+            <p class="case-card-desc">Wall Street saw margin pressure and a stumbling brand. The balance sheet and China told a different story</p>
+          </div>
+        </div>
+
+        <div class="case-card" data-index="6">
+          <div class="case-card-img-wrap">
+            <img src="uec0.png" alt="Uranium Energy Corp">
+          </div>
+          <div class="case-card-overlay"></div>
+          <div class="case-card-content">
+            <p class="case-card-ticker">UEC · Speculation</p>
+            <p class="case-card-name">Uranium Energy Corp</p>
+            <p class="case-card-desc">Uranium at cycle lows as US energy diversification made a nuclear renaissance inevitable</p>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Progress indicator -->
+    <div class="carousel-progress">
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-tickers" id="progressTickers"></div>
+    </div>
+
   </section>
 
   <!-- Lineage -->
@@ -575,15 +840,19 @@
     Kio Invests © 2026
   </footer>
 
+  <audio id="waterfallAudio" loop preload="auto">
+    <source src="waterfall2.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    // Nav appears on scroll
+    // Nav
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 80) nav.classList.add('visible');
       else nav.classList.remove('visible');
     }, { passive: true });
 
-    // Fade in on scroll
+    // Fade in
     const fadeEls = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -592,6 +861,272 @@
       });
     }, { threshold: 0.15, rootMargin: '-60px' });
     fadeEls.forEach(el => observer.observe(el));
+
+    // Carousel
+    const track = document.getElementById('carouselTrack');
+    const cards = Array.from(track.querySelectorAll('.case-card'));
+    const progressBar = document.getElementById('progressBar');
+    const tickersWrap = document.getElementById('progressTickers');
+    const total = cards.length;
+    let current = 3;
+    let startX = 0;
+    let isDragging = false;
+
+    const tickers = ['SOC', 'EWBC', 'NBR', 'GOOGL', 'BABA', 'LULU', 'UEC'];
+
+    tickers.forEach((t, i) => {
+      const el = document.createElement('span');
+      el.className = 'progress-ticker';
+      el.textContent = t;
+      el.addEventListener('click', () => goTo(i));
+      tickersWrap.appendChild(el);
+    });
+
+    function updateCarousel() {
+      const cardWidth = cards[0].offsetWidth;
+      const offset = (window.innerWidth / 2) - (cardWidth / 2) - (current * cardWidth);
+      track.style.transform = `translateX(${offset}px)`;
+
+      cards.forEach((card, i) => {
+        card.classList.remove('active', 'side', 'hidden');
+        if (i === current) card.classList.add('active');
+        else if (Math.abs(i - current) === 1) card.classList.add('side');
+        else card.classList.add('hidden');
+      });
+
+      progressBar.style.width = `${((current + 1) / total) * 100}%`;
+
+      document.querySelectorAll('.progress-ticker').forEach((el, i) => {
+        el.classList.toggle('active', i === current);
+      });
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      updateCarousel();
+    }
+
+    track.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+    track.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+    track.addEventListener('mouseleave', () => { isDragging = false; });
+
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    // Scroll wheel / trackpad
+    let scrollCooldown = false;
+    track.addEventListener('wheel', e => {
+      const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      if (!isHorizontal) return;
+      e.preventDefault();
+      if (scrollCooldown) return;
+      scrollCooldown = true;
+      if (e.deltaX > 5) goTo(current + 1);
+      if (e.deltaX < -5) goTo(current - 1);
+      setTimeout(() => { scrollCooldown = false; }, 500);
+    }, { passive: false });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // Waterfall cross-fade loop
+    const vidA = document.getElementById('waterfallA');
+    const vidB = document.getElementById('waterfallB');
+    let activeVid = vidA;
+    let inactiveVid = vidB;
+
+    vidB.style.opacity = '0';
+
+    function setupCrossfade(vid) {
+      vid.addEventListener('timeupdate', () => {
+        if (vid === activeVid && vid.duration && vid.currentTime >= vid.duration - 1.5) {
+          inactiveVid.currentTime = 0;
+          inactiveVid.play();
+          inactiveVid.style.opacity = '1';
+          activeVid.style.opacity = '0';
+          const temp = activeVid;
+          activeVid = inactiveVid;
+          inactiveVid = temp;
+        }
+      });
+    }
+
+    setupCrossfade(vidA);
+    setupCrossfade(vidB);
+    vidA.play();
+  
+    // Ink smoke effect (WebGL)
+    (function() {
+      const cv = document.getElementById('inkCanvas');
+      if (!cv) return;
+
+      const gl = cv.getContext('webgl', { antialias: true, alpha: true });
+      if (!gl) { console.warn('WebGL not available'); return; }
+      console.log('WebGL OK', gl);
+
+      const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.0,1.0); }`;
+      const fs = `
+        precision highp float;
+        uniform vec2 uRes;
+        uniform float uTime;
+
+        float hash(vec2 p){ p=fract(p*vec2(123.34,345.45)); p+=dot(p,p+34.345); return fract(p.x*p.y); }
+        float noise(vec2 p){
+          vec2 i=floor(p), f=fract(p);
+          float a=hash(i), b=hash(i+vec2(1.0,0.0)), c=hash(i+vec2(0.0,1.0)), d=hash(i+vec2(1.0,1.0));
+          vec2 u=f*f*(3.0-2.0*f);
+          return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+        }
+        float fbm(vec2 p){
+          float v=0.0, a=0.5;
+          mat2 m=mat2(1.6,1.2,-1.2,1.6);
+          for(int i=0;i<6;i++){ v+=a*noise(p); p=m*p; a*=0.5; }
+          return v;
+        }
+        void main(){
+          vec2 uv=(gl_FragCoord.xy-0.5*uRes)/uRes.y;
+          float t=uTime*0.10;
+          vec2 puv = uv + vec2(0.05*sin(t*0.6), t*0.3);
+          vec2 q=vec2(fbm(puv*2.0+vec2(0.0,t)), fbm(puv*2.0+vec2(5.2,1.3)-t));
+          vec2 r=vec2(fbm(puv*2.0+2.2*q+vec2(1.7,9.2)+0.18*t), fbm(puv*2.0+2.2*q+vec2(8.3,2.8)-0.15*t));
+          float f=fbm(puv*2.0+2.8*r);
+
+          float smoke = smoothstep(0.38, 0.62, f);
+          smoke *= 0.35;
+
+          float breathe = 0.7 + 0.3*sin(uTime*0.4);
+          smoke *= breathe;
+
+          float ny = gl_FragCoord.y / uRes.y;
+          float edgeFade = smoothstep(0.0, 0.18, ny) * smoothstep(0.0, 0.18, 1.0 - ny);
+          smoke *= edgeFade;
+
+          vec3 smokeCol = vec3(0.75, 0.78, 0.82);
+          gl_FragColor = vec4(smokeCol, smoke);
+        }`;
+
+      const sh = (type, src) => {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src); gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; }
+        return s;
+      };
+      const prog = (() => {
+        const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+        if (!v || !f) return null;
+        const p = gl.createProgram();
+        gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p);
+        return gl.getProgramParameter(p, gl.LINK_STATUS) ? p : null;
+      })();
+      if (!prog) return;
+
+      gl.useProgram(prog);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      const uRes = gl.getUniformLocation(prog, 'uRes');
+      const uTime = gl.getUniformLocation(prog, 'uTime');
+
+      const start = performance.now();
+      let raf;
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const section = document.querySelector('.tortoise-section');
+        cv.width = Math.round(section.offsetWidth * dpr);
+        cv.height = Math.round(section.offsetHeight * dpr);
+        gl.viewport(0, 0, cv.width, cv.height);
+      };
+
+      const loop = () => {
+        raf = requestAnimationFrame(loop);
+        const now = (performance.now() - start) / 1000;
+        resize();
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform2f(uRes, cv.width, cv.height);
+        gl.uniform1f(uTime, now);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      };
+
+      resize();
+      loop();
+    })();
+
+    // Waterfall audio
+    const waterfallAudio = document.getElementById('waterfallAudio');
+    waterfallAudio.volume = 0;
+    let audioFadeInterval = null;
+    let audioUnlocked = false;
+    let waterfallVisible = false;
+
+    function unlockAudio() {
+      if (audioUnlocked) return;
+      audioUnlocked = true;
+      waterfallAudio.play().then(() => {
+        waterfallAudio.pause();
+        waterfallAudio.currentTime = 0;
+        if (waterfallVisible) fadeAudioIn();
+      }).catch(() => {});
+    }
+
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('scroll', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+
+    function fadeAudioIn() {
+      clearInterval(audioFadeInterval);
+      waterfallAudio.play().catch(() => {});
+      audioFadeInterval = setInterval(() => {
+        if (waterfallAudio.volume < 0.4) {
+          waterfallAudio.volume = Math.min(0.4, waterfallAudio.volume + 0.02);
+        } else {
+          clearInterval(audioFadeInterval);
+        }
+      }, 80);
+    }
+
+    function fadeAudioOut() {
+      clearInterval(audioFadeInterval);
+      audioFadeInterval = setInterval(() => {
+        if (waterfallAudio.volume > 0) {
+          waterfallAudio.volume = Math.max(0, waterfallAudio.volume - 0.02);
+        } else {
+          clearInterval(audioFadeInterval);
+          waterfallAudio.pause();
+        }
+      }, 80);
+    }
+
+    const audioObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        waterfallVisible = entry.isIntersecting;
+        if (entry.isIntersecting && audioUnlocked) fadeAudioIn();
+        else fadeAudioOut();
+      });
+    }, { threshold: 0.5 });
+
+    audioObserver.observe(document.querySelector('.tortoise-philosophy'));
+
+    updateCarousel();
+    window.addEventListener('resize', updateCarousel);
   </script>
 
 </body>
