@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kio Invests — Patient capital. Uncommon stillness.</title>
   <style>
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     @font-face {
@@ -405,7 +406,7 @@
 
     .pillar-body {
       font-family: var(--serif);
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       line-height: 1.9;
       color: rgba(232,230,224,0.38);
       text-align: justify;
@@ -418,6 +419,7 @@
     .cases-section {
       border-top: 0.5px solid var(--border);
       padding-top: 10vh;
+      padding-bottom: 6vh;
     }
 
     .cases-header {
@@ -514,7 +516,7 @@
     }
 
     .case-card-desc {
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-size: 0.95rem;
       color: rgba(232,230,224,0.55);
       line-height: 1.55;
@@ -523,7 +525,9 @@
 
     /* ── Progress indicator ── */
     .carousel-progress {
-      padding: 2rem 4rem 0;
+      padding: 2rem 4rem 4rem;
+      position: relative;
+      z-index: 1;
     }
 
     .progress-track {
@@ -558,7 +562,10 @@
 
     /* ── Lineage ── */
     .lineage-section {
-      padding: 12vh 4rem;
+      padding-top: 32vh;
+      padding-bottom: 0;
+      padding-left: 4rem;
+      padding-right: 4rem;
       text-align: center;
       border-top: 0.5px solid var(--border);
     }
@@ -570,13 +577,15 @@
       max-width: 580px;
       margin: 0 auto;
       line-height: 1.85;
+      margin-bottom: 0;
     }
 
     /* ── Invitation ── */
     .invitation-section {
-      padding: 10vh 4rem 14vh;
+      padding: 0 4rem 14vh;
       text-align: center;
-      border-top: 0.5px solid var(--border);
+      border-top: none;
+      margin-top: -1vh;
     }
 
     .invitation-headline {
@@ -638,7 +647,10 @@
 
   <!-- Hero -->
   <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
+    <video class="hero-video" id="heroA" autoplay muted playsinline>
+      <source src="rocks.mp4" type="video/mp4">
+    </video>
+    <video class="hero-video" id="heroB" muted playsinline>
       <source src="rocks.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -824,14 +836,13 @@
   <!-- Lineage -->
   <section class="lineage-section">
     <p class="lineage-text fade-in">
-      The framework comes from Buffett, Munger, Marks, and Pabrai.<br>
-      The application is our own.
+      We inherited a way of seeing. The rest is earned.
     </p>
   </section>
 
   <!-- Invitation -->
   <section class="invitation-section">
-    <h2 class="invitation-headline fade-in">For those who think in years.</h2>
+    <h2 class="invitation-headline fade-in">for those who think in years</h2>
     <a href="mailto:hello@kioinvests.com" class="invitation-contact">hello@kioinvests.com</a>
   </section>
 
@@ -840,7 +851,10 @@
     Kio Invests © 2026
   </footer>
 
-  <audio id="waterfallAudio" loop preload="auto">
+  <audio id="waterfallAudioA" preload="auto">
+    <source src="waterfall2.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="waterfallAudioB" preload="auto">
     <source src="waterfall2.mp3" type="audio/mpeg">
   </audio>
 
@@ -852,119 +866,32 @@
       else nav.classList.remove('visible');
     }, { passive: true });
 
-    // Fade in
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-        else entry.target.classList.remove('visible');
-      });
-    }, { threshold: 0.15, rootMargin: '-60px' });
-    fadeEls.forEach(el => observer.observe(el));
+    // Hero video crossfade loop
+    const heroA = document.getElementById('heroA');
+    const heroB = document.getElementById('heroB');
+    let activeHero = heroA;
+    let inactiveHero = heroB;
+    heroB.style.opacity = '0';
 
-    // Carousel
-    const track = document.getElementById('carouselTrack');
-    const cards = Array.from(track.querySelectorAll('.case-card'));
-    const progressBar = document.getElementById('progressBar');
-    const tickersWrap = document.getElementById('progressTickers');
-    const total = cards.length;
-    let current = 3;
-    let startX = 0;
-    let isDragging = false;
-
-    const tickers = ['SOC', 'EWBC', 'NBR', 'GOOGL', 'BABA', 'LULU', 'UEC'];
-
-    tickers.forEach((t, i) => {
-      const el = document.createElement('span');
-      el.className = 'progress-ticker';
-      el.textContent = t;
-      el.addEventListener('click', () => goTo(i));
-      tickersWrap.appendChild(el);
-    });
-
-    function updateCarousel() {
-      const cardWidth = cards[0].offsetWidth;
-      const offset = (window.innerWidth / 2) - (cardWidth / 2) - (current * cardWidth);
-      track.style.transform = `translateX(${offset}px)`;
-
-      cards.forEach((card, i) => {
-        card.classList.remove('active', 'side', 'hidden');
-        if (i === current) card.classList.add('active');
-        else if (Math.abs(i - current) === 1) card.classList.add('side');
-        else card.classList.add('hidden');
-      });
-
-      progressBar.style.width = `${((current + 1) / total) * 100}%`;
-
-      document.querySelectorAll('.progress-ticker').forEach((el, i) => {
-        el.classList.toggle('active', i === current);
-      });
-    }
-
-    function goTo(index) {
-      current = Math.max(0, Math.min(total - 1, index));
-      updateCarousel();
-    }
-
-    track.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
-    track.addEventListener('mouseup', e => {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
-    });
-    track.addEventListener('mouseleave', () => { isDragging = false; });
-
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
-    }, { passive: true });
-
-    // Scroll wheel / trackpad
-    let scrollCooldown = false;
-    track.addEventListener('wheel', e => {
-      const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-      if (!isHorizontal) return;
-      e.preventDefault();
-      if (scrollCooldown) return;
-      scrollCooldown = true;
-      if (e.deltaX > 5) goTo(current + 1);
-      if (e.deltaX < -5) goTo(current - 1);
-      setTimeout(() => { scrollCooldown = false; }, 500);
-    }, { passive: false });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') goTo(current - 1);
-      if (e.key === 'ArrowRight') goTo(current + 1);
-    });
-
-    // Waterfall cross-fade loop
-    const vidA = document.getElementById('waterfallA');
-    const vidB = document.getElementById('waterfallB');
-    let activeVid = vidA;
-    let inactiveVid = vidB;
-
-    vidB.style.opacity = '0';
-
-    function setupCrossfade(vid) {
+    function setupHeroCrossfade(vid) {
       vid.addEventListener('timeupdate', () => {
-        if (vid === activeVid && vid.duration && vid.currentTime >= vid.duration - 1.5) {
-          inactiveVid.currentTime = 0;
-          inactiveVid.play();
-          inactiveVid.style.opacity = '1';
-          activeVid.style.opacity = '0';
-          const temp = activeVid;
-          activeVid = inactiveVid;
-          inactiveVid = temp;
+        if (vid !== activeHero) return;
+        if (vid.duration && vid.currentTime >= vid.duration - 1.5) {
+          inactiveHero.currentTime = 0;
+          inactiveHero.play().catch(() => {});
+          inactiveHero.style.opacity = '1';
+          activeHero.style.opacity = '0';
+          const temp = activeHero;
+          activeHero = inactiveHero;
+          inactiveHero = temp;
         }
       });
     }
 
-    setupCrossfade(vidA);
-    setupCrossfade(vidB);
-    vidA.play();
-  
+    setupHeroCrossfade(heroA);
+    setupHeroCrossfade(heroB);
+    heroA.play();
+
     // Ink smoke effect (WebGL)
     (function() {
       const cv = document.getElementById('inkCanvas');
@@ -1070,47 +997,89 @@
       loop();
     })();
 
-    // Waterfall audio
-    const waterfallAudio = document.getElementById('waterfallAudio');
-    waterfallAudio.volume = 0;
-    let audioFadeInterval = null;
+    // Waterfall audio crossfade loop
+    const audioA = document.getElementById('waterfallAudioA');
+    const audioB = document.getElementById('waterfallAudioB');
+    audioA.volume = 0;
+    audioB.volume = 0;
     let audioUnlocked = false;
     let waterfallVisible = false;
+    let targetVolume = 0;
+    let currentActive = audioA;
+    let currentInactive = audioB;
+    let crossfading = false;
 
     function unlockAudio() {
       if (audioUnlocked) return;
       audioUnlocked = true;
-      waterfallAudio.play().then(() => {
-        waterfallAudio.pause();
-        waterfallAudio.currentTime = 0;
-        if (waterfallVisible) fadeAudioIn();
-      }).catch(() => {});
+      audioA.load();
+      audioB.load();
+      if (waterfallVisible) fadeAudioIn();
     }
 
     document.addEventListener('click', unlockAudio, { once: true });
     document.addEventListener('scroll', unlockAudio, { once: true });
     document.addEventListener('touchstart', unlockAudio, { once: true });
 
+    function startCrossfadeLoop(audio) {
+      audio.addEventListener('timeupdate', function() {
+        if (audio.duration && audio.currentTime >= audio.duration - 2.5 && !crossfading) {
+          crossfading = true;
+          const vol = audio.volume;
+          currentInactive.currentTime = 0;
+          currentInactive.volume = 0;
+          currentInactive.play().catch(() => {});
+
+          let step = 0;
+          const steps = 25;
+          const xfade = setInterval(() => {
+            step++;
+            const ratio = step / steps;
+            audio.volume = Math.max(0, vol * (1 - ratio));
+            currentInactive.volume = Math.min(vol, vol * ratio);
+            if (step >= steps) {
+              clearInterval(xfade);
+              audio.pause();
+              audio.currentTime = 0;
+              const temp = currentActive;
+              currentActive = currentInactive;
+              currentInactive = temp;
+              crossfading = false;
+            }
+          }, 100);
+        }
+      });
+    }
+
+    startCrossfadeLoop(audioA);
+    startCrossfadeLoop(audioB);
+
+    let fadeInterval = null;
+
     function fadeAudioIn() {
-      clearInterval(audioFadeInterval);
-      waterfallAudio.play().catch(() => {});
-      audioFadeInterval = setInterval(() => {
-        if (waterfallAudio.volume < 0.4) {
-          waterfallAudio.volume = Math.min(0.4, waterfallAudio.volume + 0.02);
+      clearInterval(fadeInterval);
+      targetVolume = 0.25;
+      currentActive.play().catch(() => {});
+      fadeInterval = setInterval(() => {
+        if (currentActive.volume < targetVolume) {
+          currentActive.volume = Math.min(targetVolume, currentActive.volume + 0.02);
         } else {
-          clearInterval(audioFadeInterval);
+          clearInterval(fadeInterval);
         }
       }, 80);
     }
 
     function fadeAudioOut() {
-      clearInterval(audioFadeInterval);
-      audioFadeInterval = setInterval(() => {
-        if (waterfallAudio.volume > 0) {
-          waterfallAudio.volume = Math.max(0, waterfallAudio.volume - 0.02);
+      clearInterval(fadeInterval);
+      targetVolume = 0;
+      fadeInterval = setInterval(() => {
+        if (currentActive.volume > 0) {
+          currentActive.volume = Math.max(0, currentActive.volume - 0.02);
+          currentInactive.volume = Math.max(0, currentInactive.volume - 0.02);
         } else {
-          clearInterval(audioFadeInterval);
-          waterfallAudio.pause();
+          clearInterval(fadeInterval);
+          currentActive.pause();
+          currentInactive.pause();
         }
       }, 80);
     }
@@ -1124,6 +1093,119 @@
     }, { threshold: 0.5 });
 
     audioObserver.observe(document.querySelector('.tortoise-philosophy'));
+
+    // Waterfall cross-fade loop
+    const vidA = document.getElementById('waterfallA');
+    const vidB = document.getElementById('waterfallB');
+    let activeVid = vidA;
+    let inactiveVid = vidB;
+
+    vidB.style.opacity = '0';
+
+    function setupCrossfade(vid) {
+      vid.addEventListener('timeupdate', () => {
+        if (vid === activeVid && vid.duration && vid.currentTime >= vid.duration - 1.5) {
+          inactiveVid.currentTime = 0;
+          inactiveVid.play();
+          inactiveVid.style.opacity = '1';
+          activeVid.style.opacity = '0';
+          const temp = activeVid;
+          activeVid = inactiveVid;
+          inactiveVid = temp;
+        }
+      });
+    }
+
+    setupCrossfade(vidA);
+    setupCrossfade(vidB);
+    vidA.play();
+
+    // Fade in
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+        else entry.target.classList.remove('visible');
+      });
+    }, { threshold: 0.15, rootMargin: '-60px' });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Carousel
+    const track = document.getElementById('carouselTrack');
+    const cards = Array.from(track.querySelectorAll('.case-card'));
+    const progressBar = document.getElementById('progressBar');
+    const tickersWrap = document.getElementById('progressTickers');
+    const total = cards.length;
+    let current = 3;
+    let startX = 0;
+    let isDragging = false;
+
+    const tickers = ['SOC', 'EWBC', 'NBR', 'GOOGL', 'BABA', 'LULU', 'UEC'];
+
+    tickers.forEach((t, i) => {
+      const el = document.createElement('span');
+      el.className = 'progress-ticker';
+      el.textContent = t;
+      el.addEventListener('click', () => goTo(i));
+      tickersWrap.appendChild(el);
+    });
+
+    function updateCarousel() {
+      const cardWidth = cards[0].offsetWidth;
+      const offset = (window.innerWidth / 2) - (cardWidth / 2) - (current * cardWidth);
+      track.style.transform = `translateX(${offset}px)`;
+
+      cards.forEach((card, i) => {
+        card.classList.remove('active', 'side', 'hidden');
+        if (i === current) card.classList.add('active');
+        else if (Math.abs(i - current) === 1) card.classList.add('side');
+        else card.classList.add('hidden');
+      });
+
+      progressBar.style.width = `${((current + 1) / total) * 100}%`;
+
+      document.querySelectorAll('.progress-ticker').forEach((el, i) => {
+        el.classList.toggle('active', i === current);
+      });
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      updateCarousel();
+    }
+
+    track.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+    track.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+    track.addEventListener('mouseleave', () => { isDragging = false; });
+
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    // Scroll wheel / trackpad
+    let scrollCooldown = false;
+    track.addEventListener('wheel', e => {
+      const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      if (!isHorizontal) return;
+      e.preventDefault();
+      if (scrollCooldown) return;
+      scrollCooldown = true;
+      if (e.deltaX > 5) goTo(current + 1);
+      if (e.deltaX < -5) goTo(current - 1);
+      setTimeout(() => { scrollCooldown = false; }, 500);
+    }, { passive: false });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
 
     updateCarousel();
     window.addEventListener('resize', updateCarousel);
