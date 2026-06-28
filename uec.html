@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOC — Sable Offshore Corp · Kio Invests</title>
+  <title>UEC — Uranium Energy Corp · Kio Invests</title>
   <style>
     * {
       margin: 0;
@@ -107,24 +107,6 @@
       color: #7eb87e;
     }
 
-    /* Sticky chart section */
-    .scroll-story {
-      position: relative;
-    }
-
-    .sticky-chart {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2rem 4rem;
-      background: #0a0a0a;
-      z-index: 10;
-      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-    }
-
     .chart-label {
       font-family: sans-serif;
       font-size: 0.72rem;
@@ -169,125 +151,6 @@
       color: #7eb87e;
     }
 
-    /* Scroll spacer panels — each creates one "scroll chapter" */
-    .scroll-panels {
-      position: relative;
-      z-index: 1;
-    }
-
-    .scroll-panel {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 4rem;
-      pointer-events: none;
-    }
-
-    .panel-content {
-      max-width: 460px;
-      margin-left: auto;
-      background: rgba(10, 10, 10, 0.85);
-      border: 0.5px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 1.5rem 2rem;
-      pointer-events: auto;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .panel-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .panel-tag {
-      font-family: sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .panel-tag.buy {
-      color: #7eb87e;
-    }
-
-    .panel-tag.note {
-      color: #6a9fd8;
-    }
-
-    .panel-tag.sell {
-      color: #c97c6a;
-    }
-
-    .panel-date {
-      font-family: sans-serif;
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.45);
-      margin-bottom: 0.5rem;
-    }
-
-    .panel-text {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.75;
-    }
-
-    .panel-text strong {
-      color: #e8e6e0;
-      font-weight: 400;
-      font-style: italic;
-    }
-
-    /* Thesis section */
-    .thesis-section {
-      padding: 5rem 4rem;
-      max-width: 820px;
-      border-top: 0.5px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .thesis-section h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
-
-    .thesis-section p {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 1.2rem;
-      line-height: 1.85;
-    }
-
-    .thesis-section p strong {
-      color: #e8e6e0;
-      font-weight: 400;
-      font-style: italic;
-    }
-
-    .scroll-hint {
-      font-family: sans-serif;
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.2);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 1rem;
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 0.2;
-      }
-
-      50% {
-        opacity: 0.6;
-      }
-    }
-
     .visual-moment {
       width: 100%;
       overflow: hidden;
@@ -320,16 +183,12 @@
         linear-gradient(to top, #0a0a0a 0%, transparent 18%);
     }
 
-    .visual-moment-strip {
-      height: 40vh;
-    }
-
-    .visual-moment-strip::after {
-      background: none;
-    }
-
     .visual-moment-close {
       height: 27vh;
+    }
+
+    .visual-moment-close::after {
+      background: none;
     }
 
     .visual-strip-trio {
@@ -351,10 +210,6 @@
       object-fit: cover;
       display: block;
       filter: saturate(0.65);
-    }
-
-    .visual-moment-close::after {
-      background: none;
     }
 
     .case-pillars {
@@ -392,11 +247,15 @@
     }
 
     .case-pillar:nth-child(2) {
-      transition-delay: 0.4s;
+      transition-delay: 0.2s;
     }
 
     .case-pillar:nth-child(3) {
-      transition-delay: 0.8s;
+      transition-delay: 0.4s;
+    }
+
+    .case-pillar:nth-child(4) {
+      transition-delay: 0.6s;
     }
 
     .case-pillar::after {
@@ -454,10 +313,6 @@
       transition: color 0.6s ease;
       text-align: justify;
     }
-
-    .case-pillar:hover .pillar-copy {
-      color: rgba(255, 255, 255, 1);
-    }
   </style>
 </head>
 
@@ -469,39 +324,58 @@
   </nav>
 
   <div class="case-header">
-    <p class="case-label">SOC · Equities · 2025–2026</p>
-    <h1>Sable Offshore Corp</h1>
-    <p>Regulatory overhang misread as permanent impairment.</p>
+    <p class="case-label">UEC · Speculation · 2021–2023</p>
+    <h1>Uranium Energy Corp</h1>
+    <p>Uranium at cycle lows as US energy diversification made a nuclear renaissance inevitable</p>
   </div>
 
   <div class="metrics-row">
     <div class="metric">
       <p class="metric-label">Entry</p>
-      <p class="metric-value">$4.77</p>
+      <p class="metric-value">$2.76</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Exit (partial)</p>
-      <p class="metric-value">$15.13</p>
+      <p class="metric-label">First exit (half)</p>
+      <p class="metric-value">$3.50</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Return</p>
-      <p class="metric-value positive">+218%</p>
+      <p class="metric-label">Second exit (half)</p>
+      <p class="metric-value">$5.00</p>
     </div>
     <div class="metric">
       <p class="metric-label">Holding period</p>
-      <p class="metric-value">~6 months</p>
+      <p class="metric-value">~2.5 years</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Total return</p>
+      <p class="metric-value positive">+54%</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Annualized</p>
+      <p class="metric-value positive">~22%</p>
     </div>
   </div>
 
-  <!-- Sticky chart + scroll panels -->
-  <div class="visual-moment visual-moment-full">
-    <img src="soc0.jpg" alt="Offshore platform at sunset">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 100%; height: 100vh;">
+    <div style="overflow: hidden;">
+      <img src="uec0.png" alt="Uranium mining operation" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; filter: saturate(0.65);">
+    </div>
+    <div style="overflow: hidden;">
+      <img src="uec1.png" alt="Uranium mining operation" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; filter: saturate(0.65);">
+    </div>
+    <div style="overflow: hidden;">
+      <img src="uec2.png" alt="Uranium mining operation" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; filter: saturate(0.65);">
+    </div>
+    <div style="overflow: hidden;">
+      <img src="uec3.png" alt="Uranium mining operation" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; filter: saturate(0.65);">
+    </div>
   </div>
+
   <div class="chart-section"
     style="padding: 2rem 4rem; background: #0a0a0a; border-bottom: 0.5px solid rgba(255,255,255,0.08);">
-    <p class="chart-label">SOC — Full price history</p>
+    <p class="chart-label">UEC — Full price history</p>
     <div id="chart-wrap" style="width:100%; height:55vh; position:relative;">
-      <canvas id="socChart" style="width:100%; height:100%;"></canvas>
+      <canvas id="uecChart" style="width:100%; height:100%;"></canvas>
     </div>
     <div class="price-display">
       <span id="current-date"></span>
@@ -510,89 +384,102 @@
     </div>
   </div>
 
-  <div class="visual-strip-trio">
-    <div class="trio-img">
-      <img src="soc2.jpg" alt="Aerial view of offshore platform" style="object-position: center 30%;">
-    </div>
-    <div class="trio-img">
-      <img src="soc4.png" alt="Workers on platform" style="object-position: center center;">
-    </div>
-    <div class="trio-img">
-      <img src="soc5.png" alt="Las Flores Canyon facility" style="object-position: center 40%;">
-    </div>
-  </div>
-
   <section class="case-pillars">
-
     <div class="pillars-grid">
 
       <div class="case-pillar">
         <span class="pillar-num">01</span>
-        <h3 class="pillar-heading">The<br>Perception</h3>
+        <h3 class="pillar-heading">The<br>Wasteland</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">Sable Offshore was not a broken business. It was a business caught in political limbo —
-          and there is a meaningful difference between the two. The Santa Ynez Unit had been shut in since 2015, not
-          because the oil was gone, but because California's regulatory apparatus had made restart effectively
-          impossible. By late 2025 the market had stopped distinguishing between a broken asset and a blocked one. The
-          real question was never operational. It was political. A change in administration would bring a change in
-          energy philosophy — and California's decade-long blockade was precisely the kind of target a drill-baby-drill
-          executive would want to dismantle. The market was solving the wrong equation.</p>
+        <p class="pillar-copy">Fukushima did not just damage a reactor. It repriced an entire industry. After March
+          2011, uranium collapsed from $70 toward $18 per pound — a decade-long bear market driven by fear, not
+          fundamentals. Miners abandoned projects. Capital fled. Then COVID arrived and finished the job, cratering
+          energy demand and forcing the last holdout producers to cut output. The sector looked uninvestable by every
+          conventional measure. But the world's 440 operating reactors never stopped needing fuel. Uranium cannot be
+          substituted. Reactors cannot run on sentiment. The market had confused a cycle with a conclusion.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">02</span>
-        <h3 class="pillar-heading">The<br>Decision</h3>
+        <h3 class="pillar-heading">The<br>Position</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">The position was initiated on November 24, 2025, at $4.77 per share. Six weeks prior, a
-          California judge had issued an injunction blocking pipeline restart, sending shares down 26% in a single
-          session. The market read this as confirmation that California had won. The stock fell until the sellers ran
-          out. That exhaustion was the entry point. The balance sheet was distressed. The regulatory outlook was
-          hostile. In practice, this looked like a call option on a political outcome — with a defined downside and an
-          open-ended upside the market was not pricing. The prior all-time high of $35 was not a ceiling. It was a
-          reference point for what the market had already been willing to pay when the thesis looked viable.</p>
+        <p class="pillar-copy">The position was initiated on March 19, 2021, at $2.76. This was not a prediction, but a
+          recognition of asymmetry. Uranium at $29 per pound sat below the all-in cost of production for most miners. A
+          commodity cannot trade below its cost of production indefinitely. UEC was chosen for its in-situ recovery
+          model — the lowest-cost extraction method in the sector — with permitted, shovel-ready assets in Texas and
+          Wyoming. At $2.76, the stock assumed no recovery whatsoever. The downside was structurally capped while the
+          upside required only that the world continue to need nuclear power.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">03</span>
-        <h3 class="pillar-heading">The<br>Reckoning</h3>
+        <h3 class="pillar-heading">The<br>Exit</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">The thesis proved correct. The mechanism exceeded expectations. On March 13, 2026 — 110
-          days after entry — Energy Secretary Wright invoked the Defense Production Act, directing Sable to restore
-          pipeline operations immediately. Oil began flowing the following day. A partial position was exited at $15.13
-          on May 15, 2026 — a return of approximately +218% in six months. California has not conceded. The legal battle
-          between federal authority and state sovereignty remains active and unresolved. The remaining position reflects
-          continued conviction in the underlying asset. The original call option has been partially exercised. What
-          happens next demands fresh eyes.</p>
+        <p class="pillar-copy">The position was exited in two stages. Half was sold on April 5, 2021 at $3.50 —
+          seventeen days after entry, recovering initial capital at a 26.8% return. The remaining half was held into
+          2023 as uranium staged a broader recovery, exited on September 11, 2023 at $5.00, an 81.2% return on that
+          tranche. The blended return across both exits was approximately 54 percent. Exiting in 2023 was deliberate.
+          The next leg of the uranium trade required variables — the 2024 election, geopolitical energy policy,
+          Sprott-driven spot dynamics — that lay outside the original thesis.</p>
       </div>
 
     </div>
-
   </section>
 
-  <div class="visual-moment visual-moment-close">
-    <img src="soc3.jpg" alt="California coastline" style="object-position: center 40%;">
+  <div class="reflection-section"
+    style="border-top: 0.5px solid rgba(255,255,255,0.08); padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start;">
+    <div>
+      <div style="display: flex; align-items: baseline; gap: 1.5rem;">
+        <span
+          style="font-family: sans-serif; font-size: 3rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.25);">04</span>
+        <h3
+          style="font-size: clamp(1.8rem, 2.2vw, 2.4rem); font-weight: 400; font-style: italic; line-height: 1.15; color: #e8e6e0;">
+          The Reflection</h3>
+      </div>
+      <div id="reflection-rule"
+        style="width: 2.5rem; height: 0.5px; background: rgba(255,255,255,0.25); margin: 1.8rem 0; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1), background 0.6s ease;">
+      </div>
+    </div>
+
+    <p
+      style="font-family: 'Georgia', serif; font-size: 0.92rem; line-height: 1.9; color: rgba(255,255,255,0.42); text-align: justify;">
+      UEC has traded above $10 in 2026. The uranium story did not end in 2023, but rather accelerated. Russia's invasion
+      of Ukraine permanently disrupted global uranium supply chains. The artificial intelligence boom created an
+      enormous and entirely unforeseen source of electricity demand, driving technology companies toward nuclear power
+      agreements with an urgency no one had modelled. None of this was visible in 2021 or even 2023. The original thesis
+      was correct. But what followed was not the modest cycle recovery the thesis anticipated. There is now a structural
+      repricing of nuclear energy's role in the global economy. The volatility of the position across that
+      two-and-a-half year hold was considerable — and at the time of exit, the next leg of the trade required variables
+      that lay outside the original thesis entirely. Speculation is not prophecy.</p>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script>
-    const ENTRY_DATE = '11/24/2025';
-    const EXIT_DATE = '5/15/2026';
-    const ENTRY_PRICE = 4.77;
-    const EXIT_PRICE = 15.13;
-    const START_DATE = '1/1/2023';
+    const ENTRY_DATE = '3/19/2021';
+    const EXIT1_DATE = '4/5/2021';
+    const EXIT2_DATE = '9/11/2023';
+    const ENTRY_PRICE = 2.76;
+    const EXIT1_PRICE = 3.50;
+    const EXIT2_PRICE = 5.00;
+    const START_DATE = '1/1/2019';
 
     const KEY_EVENTS = [
-      { date: '2/14/2024', title: 'SPAC merger closes', color: '#6a9fd8' },
-      { date: '4/10/2025', title: 'CCC enforcement action', color: '#c97c6a' },
-      { date: '5/15/2025', title: 'Platform Harmony restarts', color: '#7eb87e' },
-      { date: '10/14/2025', title: 'State court injunction', color: '#c97c6a' },
-      { date: '3/13/2026', title: 'Federal DPA intervention', color: '#7eb87e' }
+      { date: '3/11/2020', title: 'COVID declared pandemic', color: '#c97c6a' },
+      { date: '2/24/2022', title: 'Russia invades Ukraine', color: '#c97c6a' },
+      { date: '11/5/2024', title: '2024 US election', color: '#6a9fd8' },
     ];
 
-    let allDates = [], allPrices = [], entryIdx = -1, exitIdx = -1;
+    let allDates = [], allPrices = [];
 
-    function parseDate(str) { return str.split(' ')[0]; }
+    function parseDate(str) {
+      // handles YYYY-MM-DD
+      if (str.includes('-')) {
+        const [y, m, d] = str.split('-');
+        return `${parseInt(m)}/${parseInt(d)}/${y}`;
+      }
+      return str.split(' ')[0];
+    }
 
     function findDateIdx(target) {
       let idx = allDates.indexOf(target);
@@ -615,8 +502,9 @@
 
         const toDraw = [
           ...KEY_EVENTS.map(e => ({ date: e.date, color: e.color, type: 'event', title: e.title })),
-          { date: ENTRY_DATE, color: '#00ff88', type: 'entry', price: ENTRY_PRICE },
-          { date: EXIT_DATE, color: '#ff6b35', type: 'exit', price: EXIT_PRICE }
+          { date: ENTRY_DATE, color: '#00ff88', type: 'entry', price: ENTRY_PRICE, label: '$2.76' },
+          { date: EXIT1_DATE, color: '#ff6b35', type: 'exit1', price: EXIT1_PRICE, label: '$3.50' },
+          { date: EXIT2_DATE, color: '#ff6b35', type: 'exit2', price: EXIT2_PRICE, label: '$5.00' },
         ];
 
         toDraw.forEach(item => {
@@ -634,17 +522,33 @@
             ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
             ctx.fillStyle = '#00ff88'; ctx.globalAlpha = 1; ctx.fill();
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 2; ctx.stroke();
-            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'right'; ctx.globalAlpha = 1;
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
-            ctx.strokeText('$4.77', xPos + 18, priceY - 10);
-            ctx.fillStyle = '#00ff88'; ctx.fillText('$4.77', xPos + 18, priceY - 10);
+            ctx.strokeText('$2.76', xPos - 18, priceY - 10);
+            ctx.fillStyle = '#00ff88'; ctx.fillText('$2.76', xPos - 18, priceY - 10);
             ctx.font = '700 12px sans-serif';
-            ctx.strokeText('ENTRY', xPos + 18, priceY + 6);
-            ctx.fillText('ENTRY', xPos + 18, priceY + 6);
+            ctx.strokeText('ENTRY', xPos - 18, priceY + 6);
+            ctx.fillText('ENTRY', xPos - 18, priceY + 6);
             ctx.restore();
           }
 
-          if (item.type === 'exit') {
+          if (item.type === 'exit1') {
+            const priceY = yAxis.getPixelForValue(item.price);
+            ctx.save();
+            ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 1; ctx.fill();
+            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.stroke();
+            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
+            ctx.strokeText('$3.50', xPos + 18, priceY - 16);
+            ctx.fillStyle = '#ff6b35'; ctx.fillText('$3.50', xPos + 18, priceY - 16);
+            ctx.font = '700 12px sans-serif';
+            ctx.strokeText('EXIT ½', xPos + 18, priceY - 2);
+            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9; ctx.fillText('EXIT ½', xPos + 18, priceY - 2);
+            ctx.restore();
+          }
+
+          if (item.type === 'exit2') {
             const priceY = yAxis.getPixelForValue(item.price);
             ctx.save();
             ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
@@ -652,16 +556,17 @@
             ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.stroke();
             ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
-            ctx.strokeText('$15.13', xPos, priceY + 28);
-            ctx.fillStyle = '#ff6b35'; ctx.fillText('$15.13', xPos, priceY + 28);
+            ctx.strokeText('$5.00', xPos, priceY - 16);
+            ctx.fillStyle = '#ff6b35'; ctx.fillText('$5.00', xPos, priceY - 16);
             ctx.font = '700 12px sans-serif';
-            ctx.strokeText('PARTIAL EXIT', xPos, priceY + 46);
-            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9; ctx.fillText('PARTIAL EXIT', xPos, priceY + 46);
+            ctx.strokeText('EXIT ½', xPos, priceY - 2);
+            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9; ctx.fillText('EXIT ½', xPos, priceY - 2);
             ctx.restore();
           }
 
           if (item.type === 'event') {
             const priceY = yAxis.getPixelForValue(allPrices[findDateIdx(item.date)]);
+            if (!priceY || isNaN(priceY)) return;
             const size = 6;
             ctx.save();
             ctx.fillStyle = item.color; ctx.globalAlpha = 0.15;
@@ -672,7 +577,9 @@
             ctx.strokeRect(xPos - size, priceY - size, size * 2, size * 2);
             ctx.font = '500 10px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3; ctx.lineJoin = 'round';
-            const labelY = item.title === 'Federal DPA intervention' ? priceY - size - 6 : priceY + size + 14;
+            const labelY = item.title === 'COVID declared pandemic'
+              ? priceY - size - 6
+              : priceY + size + 14;
             ctx.strokeText(item.title.toUpperCase(), xPos, labelY);
             ctx.fillStyle = item.color; ctx.globalAlpha = 0.85;
             ctx.fillText(item.title.toUpperCase(), xPos, labelY);
@@ -684,25 +591,23 @@
 
     Chart.register(verticalLinePlugin);
 
-    Papa.parse('soc_prices.csv', {
+    Papa.parse('uec_prices.csv', {
       download: true,
-      header: true,
+      header: false,
       complete: function (results) {
         const cutoff = new Date(START_DATE);
-        results.data.forEach(row => {
-          if (!row.Date || !row.Close) return;
-          const d = parseDate(row.Date);
-          const p = parseFloat(row.Close);
+        // Skip first 3 header rows: Price/Ticker/Date
+        results.data.slice(3).forEach(row => {
+          if (!row[0] || !row[1]) return;
+          const d = parseDate(row[0]);   // YYYY-MM-DD date
+          const p = parseFloat(row[1]);  // Close price
           if (isNaN(p)) return;
           if (new Date(d) < cutoff) return;
           allDates.push(d);
           allPrices.push(p);
         });
 
-        entryIdx = findDateIdx(ENTRY_DATE);
-        exitIdx = findDateIdx(EXIT_DATE);
-
-        const ctx = document.getElementById('socChart').getContext('2d');
+        const ctx = document.getElementById('uecChart').getContext('2d');
         new Chart(ctx, {
           type: 'line',
           data: {
@@ -742,7 +647,7 @@
       casePillars.forEach((pillar, i) => {
         const rect = pillar.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.65 && rect.bottom > 0) {
-          setTimeout(() => pillar.classList.add('visible'), i * 300);
+          setTimeout(() => pillar.classList.add('visible'), i * 200);
         } else {
           pillar.classList.remove('visible');
         }
@@ -751,10 +656,22 @@
 
     window.addEventListener('scroll', revealPillarsOnScroll, { passive: true });
     revealPillarsOnScroll();
+
     document.querySelectorAll('.case-pillar').forEach(pillar => {
       pillar.addEventListener('mouseenter', () => {
         pillar.querySelector('.pillar-copy').style.color = 'rgba(255,255,255,1)';
       });
+    });
+    document.querySelector('.reflection-section').addEventListener('mouseenter', () => {
+      document.querySelector('.reflection-section p').style.color = 'rgba(255,255,255,1)';
+      const rule = document.getElementById('reflection-rule');
+      rule.style.width = '5rem';
+      rule.style.background = 'rgba(255,255,255,0.45)';
+    });
+    document.querySelector('.reflection-section').addEventListener('mouseleave', () => {
+      const rule = document.getElementById('reflection-rule');
+      rule.style.width = '2.5rem';
+      rule.style.background = 'rgba(255,255,255,0.25)';
     });
 
   </script>

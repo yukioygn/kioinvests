@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EWBC — EastWest Bancorp · Kio Invests</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e6e0;
+      font-family: 'Georgia', serif;
+      line-height: 1.7;
+    }
+
+    nav {
+      padding: 1rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: #e8e6e0;
+      text-decoration: none;
+    }
+
+    .back-link {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+      margin-right: 6rem;
+    }
+
+    .back-link:hover {
+      color: #e8e6e0;
+    }
+
+    .case-header {
+      padding: 5rem 4rem 3rem;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .case-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.35);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .case-header h1 {
+      font-size: 2.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .case-header p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 580px;
+    }
+
+    .metrics-row {
+      display: flex;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metric {
+      flex: 1;
+      padding: 1.5rem 2.5rem;
+      background: #0a0a0a;
+    }
+
+    .metric-label {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric-value {
+      font-family: sans-serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: #e8e6e0;
+    }
+
+    .metric-value.positive {
+      color: #7eb87e;
+    }
+
+    .chart-label {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    #chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 55vh;
+    }
+
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    #current-date {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    #current-price {
+      font-family: sans-serif;
+      font-size: 1.1rem;
+      color: #e8e6e0;
+    }
+
+    #current-return {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    #current-return.positive {
+      color: #7eb87e;
+    }
+
+    .visual-moment {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual-moment img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.65);
+    }
+
+    .visual-moment::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .visual-moment-full {
+      height: 100vh;
+    }
+
+    .visual-moment-full::after {
+      background:
+        linear-gradient(to bottom, #0a0a0a 0%, transparent 18%),
+        linear-gradient(to top, #0a0a0a 0%, transparent 18%);
+    }
+
+    .case-pillars {
+      border-top: none;
+      position: relative;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: none;
+    }
+
+    .case-pillar {
+      padding: 4rem;
+      border-right: 0.5px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .case-pillar:last-child {
+      border-right: none;
+    }
+
+    .case-pillar.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .case-pillar:nth-child(1) {
+      transition-delay: 0s;
+    }
+
+    .case-pillar:nth-child(2) {
+      transition-delay: 0.4s;
+    }
+
+    .case-pillar:nth-child(3) {
+      transition-delay: 0.8s;
+    }
+
+    .case-pillar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .case-pillar:hover::after {
+      opacity: 1;
+    }
+
+    .pillar-num {
+      font-family: sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.25);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .pillar-heading {
+      font-size: clamp(1.8rem, 2.2vw, 2.4rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.15;
+      margin-bottom: 1.8rem;
+      color: #e8e6e0;
+    }
+
+    .pillar-rule {
+      width: 2.5rem;
+      height: 0.5px;
+      background: rgba(255, 255, 255, 0.25);
+      margin-bottom: 1.8rem;
+      transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1), background 0.6s ease;
+    }
+
+    .case-pillar:hover .pillar-rule {
+      width: 5rem;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .pillar-copy {
+      font-family: 'Georgia', serif;
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.42);
+      transition: color 0.6s ease;
+      text-align: justify;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">KIO INVESTS</a>
+    <a href="index.html" class="back-link">← All cases</a>
+  </nav>
+
+  <div class="case-header">
+    <p class="case-label">EWBC · Investment · 2023–2025</p>
+    <h1>EastWest Bancorp</h1>
+    <p>The SVB crisis painted every regional bank with the same brush. EastWest was not SVB. The market, in its panic,
+      did not stop to notice the difference.</p>
+  </div>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <p class="metric-label">Entry</p>
+      <p class="metric-value">$49.14</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Blended exit</p>
+      <p class="metric-value">~$81.38</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Total return</p>
+      <p class="metric-value positive">+65.6%</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Annualized</p>
+      <p class="metric-value positive">~28.6%</p>
+    </div>
+    <div class="metric">
+      <p class="metric-label">Holding period</p>
+      <p class="metric-value">~2 years</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 60vh 35vh; width: 100%; gap: 0;">
+    <div style="grid-row: 1 / -1; overflow: hidden;">
+      <img src="ewb0.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
+    </div>
+    <div style="overflow: hidden;">
+      <img src="ewb3.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
+    </div>
+    <div style="overflow: hidden;">
+      <img src="ewb2.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
+    </div>
+  </div>
+
+  <div class="chart-section"
+    style="padding: 2rem 4rem; background: #0a0a0a; border-bottom: 0.5px solid rgba(255,255,255,0.08);">
+    <p class="chart-label">EWBC — Full price history</p>
+    <div id="chart-wrap" style="width:100%; height:55vh; position:relative;">
+      <canvas id="ewbcChart" style="width:100%; height:100%;"></canvas>
+    </div>
+    <div class="price-display">
+      <span id="current-date"></span>
+      <span id="current-price"></span>
+      <span id="current-return"></span>
+    </div>
+  </div>
+
+  <section class="case-pillars">
+    <div class="pillars-grid">
+
+      <div class="case-pillar">
+        <span class="pillar-num">01</span>
+        <h3 class="pillar-heading">The<br>Panic</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-copy">In March 2023, Silicon Valley Bank collapsed in 48 hours. Signature Bank followed. First
+          Republic teetered. The contagion was real — but it was also specific. SVB had loaded its balance sheet with
+          long-duration bonds while rates rose, and served a concentrated depositor base of venture-backed companies all
+          wired into the same panic network. When confidence broke, it broke fast. The market, unwilling to distinguish,
+          sold every regional bank in sight. EWBC fell sharply alongside institutions that shared nothing with SVB
+          except a zip code in the same regulatory category. The selloff was indiscriminate, providing ample
+          opportunity.</p>
+      </div>
+
+      <div class="case-pillar">
+        <span class="pillar-num">02</span>
+        <h3 class="pillar-heading">The<br>Distinction</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-copy">EastWest Bancorp was not SVB. Founded to serve the Chinese-American community, it had
+          grown into a full-service commercial bank with a structural moat that most regional banks could not claim —
+          one of the only U.S. institutions holding a full banking license in China. Its deposit base was
+          retail-anchored and relationship-driven. Its balance sheet was conservatively managed. Its profitability was
+          industry-leading. The position was initiated on May 22, 2023, at $49.14. The market had confused category with
+          quality. EastWest's moat was intact. Its depositors had not run. The price was wrong.</p>
+      </div>
+
+      <div class="case-pillar">
+        <span class="pillar-num">03</span>
+        <h3 class="pillar-heading">The<br>Harvest</h3>
+        <div class="pillar-rule"></div>
+        <p class="pillar-copy">Each sale came reluctantly. EWBC was not a deteriorating business afterall; it was a
+          compounding one. A thesis built on mispricing has a natural endpoint: the moment the price is no longer wrong.
+          Each tranche tested that question freshly. When the original margin of safety had been recaptured and the
+          repricing had substantially corrected, the remaining upside belonged to a different investor with a different
+          thesis. The blended exit across all tranches was approximately $81.38 — a total return of 65.6% over roughly
+          two years, annualized at approximately 28.6%. The timing of the exit was a judgment call, one we can live with.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script>
+    const ENTRY_DATE = '5/22/2023';
+    const ENTRY_PRICE = 49.14;
+    const START_DATE = '1/1/2022';
+
+    const EXITS = [
+      { date: '12/5/2023', price: 67.49, label: '$67.49' },
+      { date: '5/7/2024', price: 77.30, label: '$77.30' },
+      { date: '7/25/2024', price: 90.00, label: '$90.00' },
+      { date: '11/13/2024', price: 104.00, label: '$104' },
+      { date: '5/15/2025', price: 100.00, label: '$100', fullyExited: true },
+    ];
+
+    const KEY_EVENTS = [
+      { date: '3/10/2023', title: 'SVB collapses', color: '#c97c6a' },
+      { date: '2/1/2026', title: 'Supreme Court voids tariffs', color: '#6a9fd8' },
+    ];
+
+    let allDates = [], allPrices = [];
+
+    function parseDate(str) {
+      if (str.includes('-')) {
+        const [y, m, d] = str.split('-');
+        return `${parseInt(m)}/${parseInt(d)}/${y}`;
+      }
+      return str.split(' ')[0];
+    }
+
+    function findDateIdx(target) {
+      let idx = allDates.indexOf(target);
+      if (idx !== -1) return idx;
+      const t = new Date(target).getTime();
+      let closest = -1, minDiff = Infinity;
+      allDates.forEach((d, i) => {
+        const diff = Math.abs(new Date(d).getTime() - t);
+        if (diff < minDiff) { minDiff = diff; closest = i; }
+      });
+      return closest;
+    }
+
+    const verticalLinePlugin = {
+      id: 'verticalLines',
+      afterDraw(chart) {
+        const ctx = chart.ctx;
+        const xAxis = chart.scales.x;
+        const yAxis = chart.scales.y;
+
+        // Draw key events
+        KEY_EVENTS.forEach(e => {
+          const idx = findDateIdx(e.date);
+          if (idx === -1) return;
+          let xPos;
+          try { xPos = xAxis.getPixelForValue(allDates[idx]); } catch (err) { return; }
+          if (xPos === undefined || isNaN(xPos)) return;
+          if (xPos < xAxis.left - 1 || xPos > xAxis.right + 1) return;
+
+          const priceY = yAxis.getPixelForValue(allPrices[idx]);
+          if (!priceY || isNaN(priceY)) return;
+          const size = 6;
+          ctx.save();
+          ctx.fillStyle = e.color; ctx.globalAlpha = 0.15;
+          ctx.fillRect(xPos - size - 3, priceY - size - 3, (size + 3) * 2, (size + 3) * 2);
+          ctx.fillStyle = e.color; ctx.globalAlpha = 1;
+          ctx.fillRect(xPos - size, priceY - size, size * 2, size * 2);
+          ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 1.5;
+          ctx.strokeRect(xPos - size, priceY - size, size * 2, size * 2);
+          ctx.font = '500 10px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
+          ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3; ctx.lineJoin = 'round';
+          ctx.strokeText(e.title.toUpperCase(), xPos, priceY - size - 6);
+          ctx.fillStyle = e.color; ctx.globalAlpha = 0.85;
+          ctx.fillText(e.title.toUpperCase(), xPos, priceY - size - 6);
+          ctx.restore();
+        });
+
+        // Draw entry
+        const entryIdx = findDateIdx(ENTRY_DATE);
+        if (entryIdx !== -1) {
+          let xPos;
+          try { xPos = xAxis.getPixelForValue(allDates[entryIdx]); } catch (e) { return; }
+          if (xPos !== undefined && !isNaN(xPos) && xPos >= xAxis.left - 1 && xPos <= xAxis.right + 1) {
+            const priceY = yAxis.getPixelForValue(ENTRY_PRICE);
+            ctx.save();
+            ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
+            ctx.fillStyle = '#00ff88'; ctx.globalAlpha = 1; ctx.fill();
+            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
+            ctx.strokeText('$49.14', xPos + 18, priceY + 16);
+            ctx.fillStyle = '#00ff88'; ctx.fillText('$49.14', xPos + 18, priceY + 16);
+            ctx.font = '700 12px sans-serif';
+            ctx.strokeText('ENTRY', xPos + 18, priceY + 32);
+            ctx.fillText('ENTRY', xPos + 18, priceY + 32);
+            ctx.restore();
+          }
+        }
+
+        // Draw exits
+        EXITS.forEach((exit, i) => {
+          const idx = findDateIdx(exit.date);
+          if (idx === -1) return;
+          let xPos;
+          try { xPos = xAxis.getPixelForValue(allDates[idx]); } catch (e) { return; }
+          if (xPos === undefined || isNaN(xPos)) return;
+          if (xPos < xAxis.left - 1 || xPos > xAxis.right + 1) return;
+
+          const priceY = yAxis.getPixelForValue(exit.price);
+          ctx.save();
+          ctx.beginPath(); ctx.arc(xPos, priceY, 8, 0, Math.PI * 2);
+          ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 1; ctx.fill();
+          ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.stroke();
+          ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
+          ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
+          ctx.strokeText(exit.label, xPos, priceY - 16);
+          ctx.fillStyle = '#ff6b35'; ctx.fillText(exit.label, xPos, priceY - 16);
+          if (exit.fullyExited) {
+            ctx.font = '700 12px sans-serif';
+            ctx.strokeText('FULLY', xPos, priceY + 20);
+            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9;
+            ctx.fillText('FULLY', xPos, priceY + 20);
+            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3;
+            ctx.strokeText('EXITED', xPos, priceY + 34);
+            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9;
+            ctx.fillText('EXITED', xPos, priceY + 34);
+          }
+          ctx.restore();
+        });
+      }
+    };
+
+    Chart.register(verticalLinePlugin);
+
+    Papa.parse('ewbc_prices.csv', {
+      download: true,
+      header: false,
+      complete: function (results) {
+        const cutoff = new Date(START_DATE);
+        results.data.slice(3).forEach(row => {
+          if (!row[0] || !row[1]) return;
+          const d = parseDate(row[0]);
+          const p = parseFloat(row[1]);
+          if (isNaN(p)) return;
+          if (new Date(d) < cutoff) return;
+          allDates.push(d);
+          allPrices.push(p);
+        });
+
+        const ctx = document.getElementById('ewbcChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: allDates,
+            datasets: [{
+              data: allPrices,
+              borderColor: '#7eb87e',
+              backgroundColor: 'transparent',
+              borderWidth: 1.5,
+              pointRadius: 0,
+              tension: 0.1,
+              fill: false
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 0 },
+            plugins: { legend: { display: false }, tooltip: { enabled: false } },
+            scales: {
+              x: {
+                ticks: { color: 'rgba(255,255,255,0.25)', font: { size: 11, family: 'sans-serif' }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 },
+                grid: { color: 'rgba(255,255,255,0.04)' }
+              },
+              y: {
+                ticks: { color: 'rgba(255,255,255,0.25)', font: { size: 11, family: 'sans-serif' }, callback: v => '$' + v.toFixed(0) },
+                grid: { color: 'rgba(255,255,255,0.04)' }
+              }
+            }
+          }
+        });
+      }
+    });
+
+    const casePillars = document.querySelectorAll('.case-pillar');
+    function revealPillarsOnScroll() {
+      casePillars.forEach((pillar, i) => {
+        const rect = pillar.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.65 && rect.bottom > 0) {
+          setTimeout(() => pillar.classList.add('visible'), i * 300);
+        } else {
+          pillar.classList.remove('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealPillarsOnScroll, { passive: true });
+    revealPillarsOnScroll();
+
+    document.querySelectorAll('.case-pillar').forEach(pillar => {
+      pillar.addEventListener('mouseenter', () => {
+        pillar.querySelector('.pillar-copy').style.color = 'rgba(255,255,255,1)';
+      });
+    });
+  </script>
+
+</body>
+
+</html>
