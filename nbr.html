@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EWBC — EastWest Bancorp · Kio Invests</title>
+  <title>NBR — Nabors Industries · Kio Invests</title>
   <style>
     * {
       margin: 0;
@@ -107,50 +107,6 @@
       color: #7eb87e;
     }
 
-    .chart-label {
-      font-family: sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      color: rgba(255, 255, 255, 0.3);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    #chart-wrap {
-      position: relative;
-      width: 100%;
-      height: 55vh;
-    }
-
-    .price-display {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-top: 0.8rem;
-    }
-
-    #current-date {
-      font-family: sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    #current-price {
-      font-family: sans-serif;
-      font-size: 1.1rem;
-      color: #e8e6e0;
-    }
-
-    #current-return {
-      font-family: sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    #current-return.positive {
-      color: #7eb87e;
-    }
-
     .visual-moment {
       width: 100%;
       overflow: hidden;
@@ -183,15 +139,46 @@
         linear-gradient(to top, #0a0a0a 0%, transparent 18%);
     }
 
+    .visual-moment-close {
+      height: 27vh;
+    }
+
+    .visual-strip-trio {
+      display: flex;
+      width: 100%;
+      height: 40vh;
+    }
+
+    .trio-img {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .trio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.65);
+    }
+
+    .chart-label {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
     .case-pillars {
-      border-top: none;
       position: relative;
     }
 
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border-top: none;
     }
 
     .case-pillar {
@@ -218,11 +205,11 @@
     }
 
     .case-pillar:nth-child(2) {
-      transition-delay: 0.4s;
+      transition-delay: 0.2s;
     }
 
     .case-pillar:nth-child(3) {
-      transition-delay: 0.8s;
+      transition-delay: 0.4s;
     }
 
     .case-pillar::after {
@@ -289,56 +276,51 @@
   </nav>
 
   <div class="case-header">
-    <p class="case-label">EWBC · Investment · 2023–2025</p>
-    <h1>EastWest Bancorp</h1>
-    <p>SVB crisis created indiscriminate regional bank selling.</p>
+    <p class="case-label">NBR · Investment · 2025–</p>
+    <h1>Nabors Industries</h1>
+    <p>Debt-laden driller entering a supercycle as geopolitical fractures reprice global energy.</p>
   </div>
 
   <div class="metrics-row">
     <div class="metric">
       <p class="metric-label">Entry</p>
-      <p class="metric-value">$49.14</p>
+      <p class="metric-value">$30.00</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Blended exit</p>
-      <p class="metric-value">~$81.38</p>
+      <p class="metric-label">First exit (partial)</p>
+      <p class="metric-value">$81.13</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Total return</p>
-      <p class="metric-value positive">+65.6%</p>
+      <p class="metric-label">Second exit (partial)</p>
+      <p class="metric-value">$90.70</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Annualized</p>
-      <p class="metric-value positive">~28.6%</p>
-    </div>
-    <div class="metric">
-      <p class="metric-label">Holding period</p>
-      <p class="metric-value">~2 years</p>
+      <p class="metric-label">Status</p>
+      <p class="metric-value">Position open</p>
     </div>
   </div>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 60vh 35vh; width: 100%; gap: 0;">
-    <div style="grid-row: 1 / -1; overflow: hidden;">
-      <img src="ewb0.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
-    </div>
-    <div style="overflow: hidden;">
-      <img src="ewb3.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
-    </div>
-    <div style="overflow: hidden;">
-      <img src="ewb2.png" alt="EastWest Bancorp" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
-    </div>
+  <div class="visual-moment visual-moment-full">
+    <img src="nabors0.png" alt="Nabors Industries drilling rig">
   </div>
 
   <div class="chart-section"
     style="padding: 2rem 4rem; background: #0a0a0a; border-bottom: 0.5px solid rgba(255,255,255,0.08);">
-    <p class="chart-label">EWBC — Full price history</p>
-    <div id="chart-wrap" style="width:100%; height:55vh; position:relative;">
-      <canvas id="ewbcChart" style="width:100%; height:100%;"></canvas>
+    <p class="chart-label">NBR — Full price history</p>
+    <div style="width:100%; height:55vh; position:relative;">
+      <canvas id="nbrChart" style="width:100%; height:100%;"></canvas>
     </div>
-    <div class="price-display">
-      <span id="current-date"></span>
-      <span id="current-price"></span>
-      <span id="current-return"></span>
+  </div>
+
+  <div class="visual-strip-trio">
+    <div class="trio-img">
+      <img src="nabors4.png" alt="Nabors Industries">
+    </div>
+    <div class="trio-img">
+      <img src="nabors3.png" alt="Nabors Industries">
+    </div>
+    <div class="trio-img">
+      <img src="nabors2.jpg" alt="Nabors Industries">
     </div>
   </div>
 
@@ -347,62 +329,61 @@
 
       <div class="case-pillar">
         <span class="pillar-num">01</span>
-        <h3 class="pillar-heading">The<br>Panic</h3>
+        <h3 class="pillar-heading">The<br>Burden</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">In March 2023, Silicon Valley Bank collapsed in 48 hours. Signature Bank followed. First
-          Republic teetered. The contagion was real — but it was also specific. SVB had loaded its balance sheet with
-          long-duration bonds while rates rose, and served a concentrated depositor base of venture-backed companies all
-          wired into the same panic network. When confidence broke, it broke fast. The market, unwilling to distinguish,
-          sold every regional bank in sight. EWBC fell sharply alongside institutions that shared nothing with SVB
-          except a zip code in the same regulatory category. The selloff was indiscriminate, providing ample
-          opportunity.</p>
+        <p class="pillar-copy">Nabors was a company the market had given up on. Its all-time high was over $1,200 per
+          share. By early 2025 it traded at $30 given a decade of debt accumulation. Industry downturns and dwindling
+          faith compressed the stock into something the investment community filed away under uninvestable. The bear
+          case was simple and not wrong: the balance sheet was the risk. Although the bears were pricing the liability,
+          management was taking painful and deliberate steps to dismantle the debt overhang. Net debt had peaked. The
+          direction had changed. The market wasn't buying it.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">02</span>
-        <h3 class="pillar-heading">The<br>Distinction</h3>
+        <h3 class="pillar-heading">The<br>Kingdom</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">EastWest Bancorp was not SVB. Founded to serve the Chinese-American community, it had
-          grown into a full-service commercial bank with a structural moat that most regional banks could not claim —
-          one of the only U.S. institutions holding a full banking license in China. Its deposit base was
-          retail-anchored and relationship-driven. Its balance sheet was conservatively managed. Its profitability was
-          industry-leading. The position was initiated on May 22, 2023, at $49.14. The market had confused category with
-          quality. EastWest's moat was intact. Its depositors had not run. The price was wrong.</p>
+        <p class="pillar-copy">The anchor of the thesis was SANAD: a 50/50 joint venture with Saudi Aramco,
+          progressively deploying 50 newbuild rigs over a decade structured to recover
+          invested capital within five years. This was not optionality. It was contracted, long-duration,
+          capital-recovering revenue from the most consequential oil producer on earth. Each new rig was a
+          guaranteed cash flow unit coming online. Geopolitical risk in the region was the very reason Saudi Arabia's
+          production expansion was non-negotiable. The Kingdom needed the rigs. Nabors had the contract. We had the preparation and conviction to buy.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">03</span>
-        <h3 class="pillar-heading">The<br>Harvest</h3>
+        <h3 class="pillar-heading">The<br>Reinvention</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">Each sale came reluctantly. EWBC was not a deteriorating business afterall; it was a
-          compounding one. A thesis built on mispricing has a natural endpoint: the moment the price is no longer wrong.
-          Each tranche tested that question freshly. When the original margin of safety had been recaptured and the
-          repricing had substantially corrected, the remaining upside belonged to a different investor with a different
-          thesis. The blended exit across all tranches was approximately $81.38 — a total return of 65.6% over roughly
-          two years, annualized at approximately 28.6%. The timing of the exit was a judgment call, one we can live with.</p>
+        <p class="pillar-copy">This is not the Nabors of 2014. The company that once competed on rig count alone was
+          building a proprietary software and automation layer on top of its hardware base. SmartDRILL, SmartSLIDE,
+          RigCLOUD, Canrig robotics point to a business model in transition. In 2025, Nabors and Halliburton completed
+          the first fully automated land drilling operations in Oman. In April 2025, an AI analytics partnership with
+          Corva expanded real-time predictive capabilities across the fleet. The market was pricing a leveraged rig
+          operator. What was being built was something closer to an energy technology platform.</p>
       </div>
 
     </div>
   </section>
 
+  <div class="visual-moment visual-moment-close">
+    <img src="nabors7.jpg" alt="Nabors Industries" style="object-position: center 35%;">
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script>
-    const ENTRY_DATE = '5/22/2023';
-    const ENTRY_PRICE = 49.14;
-    const START_DATE = '1/1/2022';
+    const ENTRY_DATE = '5/15/2025';
+    const ENTRY_PRICE = 30.00;
+    const START_DATE = '1/1/2023';
 
     const EXITS = [
-      { date: '12/5/2023', price: 67.49, label: '$67.49' },
-      { date: '5/7/2024', price: 77.30, label: '$77.30' },
-      { date: '7/25/2024', price: 90.00, label: '$90.00' },
-      { date: '11/13/2024', price: 104.00, label: '$104' },
-      { date: '5/15/2025', price: 100.00, label: '$100', fullyExited: true },
+      { date: '3/9/2026', price: 81.13, label: '$81.13' },
+      { date: '4/27/2026', price: 90.70, label: '$90.70', lastExit: true },
     ];
 
     const KEY_EVENTS = [
-      { date: '3/10/2023', title: 'SVB collapses', color: '#c97c6a' },
-      { date: '2/1/2026', title: 'Supreme Court voids tariffs', color: '#6a9fd8' },
+      { date: '4/15/2025', title: 'First automated rig — Oman', color: '#6a9fd8', labelAbove: false },
     ];
 
     let allDates = [], allPrices = [];
@@ -434,7 +415,7 @@
         const xAxis = chart.scales.x;
         const yAxis = chart.scales.y;
 
-        // Draw key events
+        // Key events
         KEY_EVENTS.forEach(e => {
           const idx = findDateIdx(e.date);
           if (idx === -1) return;
@@ -442,7 +423,6 @@
           try { xPos = xAxis.getPixelForValue(allDates[idx]); } catch (err) { return; }
           if (xPos === undefined || isNaN(xPos)) return;
           if (xPos < xAxis.left - 1 || xPos > xAxis.right + 1) return;
-
           const priceY = yAxis.getPixelForValue(allPrices[idx]);
           if (!priceY || isNaN(priceY)) return;
           const size = 6;
@@ -453,15 +433,15 @@
           ctx.fillRect(xPos - size, priceY - size, size * 2, size * 2);
           ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 1.5;
           ctx.strokeRect(xPos - size, priceY - size, size * 2, size * 2);
-          ctx.font = '500 10px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
+          ctx.font = '500 10px sans-serif'; ctx.textAlign = 'right'; ctx.globalAlpha = 1;
           ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3; ctx.lineJoin = 'round';
-          ctx.strokeText(e.title.toUpperCase(), xPos, priceY - size - 6);
+          ctx.strokeText(e.title.toUpperCase(), xPos - size - 12, priceY + 3);
           ctx.fillStyle = e.color; ctx.globalAlpha = 0.85;
-          ctx.fillText(e.title.toUpperCase(), xPos, priceY - size - 6);
+          ctx.fillText(e.title.toUpperCase(), xPos - size - 12, priceY + 3);
           ctx.restore();
         });
 
-        // Draw entry
+        // Entry
         const entryIdx = findDateIdx(ENTRY_DATE);
         if (entryIdx !== -1) {
           let xPos;
@@ -472,45 +452,37 @@
             ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
             ctx.fillStyle = '#00ff88'; ctx.globalAlpha = 1; ctx.fill();
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 2; ctx.stroke();
-            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
             ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
-            ctx.strokeText('$49.14', xPos + 18, priceY + 16);
-            ctx.fillStyle = '#00ff88'; ctx.fillText('$49.14', xPos + 18, priceY + 16);
+            ctx.strokeText('$30.00', xPos, priceY - 28);
+            ctx.fillStyle = '#00ff88'; ctx.fillText('$30.00', xPos, priceY - 28);
             ctx.font = '700 12px sans-serif';
-            ctx.strokeText('ENTRY', xPos + 18, priceY + 32);
-            ctx.fillText('ENTRY', xPos + 18, priceY + 32);
+            ctx.strokeText('ENTRY', xPos, priceY - 14);
+            ctx.fillText('ENTRY', xPos, priceY - 14);
             ctx.restore();
           }
         }
 
-        // Draw exits
-        EXITS.forEach((exit, i) => {
+        // Exits
+        EXITS.forEach(exit => {
           const idx = findDateIdx(exit.date);
           if (idx === -1) return;
           let xPos;
           try { xPos = xAxis.getPixelForValue(allDates[idx]); } catch (e) { return; }
           if (xPos === undefined || isNaN(xPos)) return;
           if (xPos < xAxis.left - 1 || xPos > xAxis.right + 1) return;
-
           const priceY = yAxis.getPixelForValue(exit.price);
           ctx.save();
-          ctx.beginPath(); ctx.arc(xPos, priceY, 8, 0, Math.PI * 2);
+          ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
           ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 1; ctx.fill();
           ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.stroke();
           ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
           ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
           ctx.strokeText(exit.label, xPos, priceY - 16);
           ctx.fillStyle = '#ff6b35'; ctx.fillText(exit.label, xPos, priceY - 16);
-          if (exit.fullyExited) {
-            ctx.font = '700 12px sans-serif';
-            ctx.strokeText('FULLY', xPos, priceY + 20);
-            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9;
-            ctx.fillText('FULLY', xPos, priceY + 20);
-            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3;
-            ctx.strokeText('EXITED', xPos, priceY + 34);
-            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9;
-            ctx.fillText('EXITED', xPos, priceY + 34);
-          }
+          ctx.font = '700 12px sans-serif';
+          ctx.strokeText('PARTIAL EXIT', xPos, priceY + 24);
+          ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9; ctx.fillText('PARTIAL EXIT', xPos, priceY + 24);
           ctx.restore();
         });
       }
@@ -518,7 +490,7 @@
 
     Chart.register(verticalLinePlugin);
 
-    Papa.parse('ewbc_prices.csv', {
+    Papa.parse('nbr_prices.csv', {
       download: true,
       header: false,
       complete: function (results) {
@@ -533,7 +505,7 @@
           allPrices.push(p);
         });
 
-        const ctx = document.getElementById('ewbcChart').getContext('2d');
+        const ctx = document.getElementById('nbrChart').getContext('2d');
         new Chart(ctx, {
           type: 'line',
           data: {
@@ -573,7 +545,7 @@
       casePillars.forEach((pillar, i) => {
         const rect = pillar.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.65 && rect.bottom > 0) {
-          setTimeout(() => pillar.classList.add('visible'), i * 300);
+          setTimeout(() => pillar.classList.add('visible'), i * 200);
         } else {
           pillar.classList.remove('visible');
         }

@@ -5,7 +5,7 @@ import urllib.request, csv, json, ssl, datetime
 ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
-for ticker in ['SOC', 'UEC', 'EWBC']:
+for ticker in ['SOC', 'UEC', 'EWBC', 'GOOGL', 'NBR', 'LULU', 'BABA']:
     req = urllib.request.Request(
         f'https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=10y',
         headers={'User-Agent': 'Mozilla/5.0'}
