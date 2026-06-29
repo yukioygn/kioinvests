@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BABA — Alibaba Group · Kio Invests</title>
+  <title>LULU — Lululemon Athletica · Kio Invests</title>
   <style>
     * {
       margin: 0;
@@ -116,54 +116,8 @@
       color: #7eb87e;
     }
 
-    .visual-moment {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .visual-moment img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      filter: saturate(0.65);
-    }
-
-    .visual-moment::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .visual-moment-full {
-      height: 100vh;
-    }
-
-    .visual-moment-close {
-      height: 27vh;
-    }
-
-    .visual-strip-trio {
-      display: flex;
-      width: 100%;
-      height: 40vh;
-    }
-
-    .trio-img {
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .trio-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      filter: saturate(0.65);
+    .metric-value.negative {
+      color: #c97c6a;
     }
 
     .chart-label {
@@ -175,13 +129,54 @@
       margin-bottom: 1rem;
     }
 
+    #chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 55vh;
+    }
+
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    #current-date {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    #current-price {
+      font-family: sans-serif;
+      font-size: 1.1rem;
+      color: #e8e6e0;
+    }
+
+    #current-return {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    #current-return.positive {
+      color: #7eb87e;
+    }
+
+    #current-return.negative {
+      color: #c97c6a;
+    }
+
     .case-pillars {
+      border-top: none;
       position: relative;
     }
 
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      border-top: none;
     }
 
     .case-pillar {
@@ -208,11 +203,11 @@
     }
 
     .case-pillar:nth-child(2) {
-      transition-delay: 0.2s;
+      transition-delay: 0.4s;
     }
 
     .case-pillar:nth-child(3) {
-      transition-delay: 0.4s;
+      transition-delay: 0.8s;
     }
 
     .case-pillar::after {
@@ -268,6 +263,57 @@
       transition: color 0.6s ease;
       text-align: justify;
     }
+
+    .visual-moment {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual-moment img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.65);
+    }
+
+    .visual-moment::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .visual-moment-close {
+      height: 27vh;
+    }
+
+    .visual-moment-close::after {
+      background: none;
+    }
+
+    .visual-strip-trio {
+      display: flex;
+      width: 100%;
+      height: 40vh;
+      gap: 0;
+    }
+
+    .trio-img {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .trio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.65);
+    }
   </style>
 </head>
 
@@ -279,19 +325,19 @@
   </nav>
 
   <div class="case-header">
-    <p class="case-label">BABA · Investment · 2024–</p>
-    <h1>Alibaba Group</h1>
-    <p>State pressure and market panic obscured a global supply chain giant pivoting into AI.</p>
+    <p class="case-label">LULU · Active Position · 2026–</p>
+    <h1>Lululemon Athletica</h1>
+    <p>A community misread as a stumbling brand.</p>
   </div>
 
   <div class="metrics-row">
     <div class="metric">
-      <p class="metric-label">Entry</p>
-      <p class="metric-value">$87.56</p>
+      <p class="metric-label">Entry T1</p>
+      <p class="metric-value">$143.80</p>
     </div>
     <div class="metric">
-      <p class="metric-label">Partial exit</p>
-      <p class="metric-value">$166.42</p>
+      <p class="metric-label">Entry T2</p>
+      <p class="metric-value">$111.84</p>
     </div>
     <div class="metric">
       <p class="metric-label">Status</p>
@@ -299,27 +345,37 @@
     </div>
   </div>
 
-  <div class="visual-moment visual-moment-full">
-    <img src="baba0.png" alt="Alibaba Group">
+  <div style="display: flex; width: 100%; height: 100vh;">
+    <div style="flex: 1; overflow: hidden;">
+      <img src="lulu0.png" alt="Lululemon Athletica" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
+    </div>
+    <div style="flex: 1; overflow: hidden;">
+      <img src="lulu4.png" alt="Lululemon Athletica" style="width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.65); display:block;">
+    </div>
   </div>
 
   <div class="chart-section"
     style="padding: 2rem 4rem; background: #0a0a0a; border-bottom: 0.5px solid rgba(255,255,255,0.08);">
-    <p class="chart-label">BABA — Full price history</p>
-    <div style="width:100%; height:55vh; position:relative;">
-      <canvas id="babaChart" style="width:100%; height:100%;"></canvas>
+    <p class="chart-label">LULU — Full price history</p>
+    <div id="chart-wrap" style="width:100%; height:55vh; position:relative;">
+      <canvas id="luluChart" style="width:100%; height:100%;"></canvas>
+    </div>
+    <div class="price-display">
+      <span id="current-date"></span>
+      <span id="current-price"></span>
+      <span id="current-return"></span>
     </div>
   </div>
 
   <div class="visual-strip-trio">
     <div class="trio-img">
-      <img src="baba2.jpg" alt="Alibaba Group">
+      <img src="lulu1.jpg" alt="Lululemon">
     </div>
     <div class="trio-img">
-      <img src="baba4.png" alt="Alibaba Group">
+      <img src="lulu3.png" alt="Lululemon">
     </div>
     <div class="trio-img">
-      <img src="baba3.png" alt="Alibaba Group">
+      <img src="lulu6.png" alt="Lululemon" style="object-position: center 20%;">
     </div>
   </div>
 
@@ -328,60 +384,65 @@
 
       <div class="case-pillar">
         <span class="pillar-num">01</span>
-        <h3 class="pillar-heading">The<br>Crackdown</h3>
+        <h3 class="pillar-heading">The<br>Brand</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">In October 2020, Jack Ma criticized China's financial regulators at a Shanghai summit.
-          Within weeks the $37 billion Ant Group IPO was halted, an antitrust investigation into Alibaba was launched,
-          and the likable frontman of Alibaba vanished from public view. What followed was a multi-year regulatory siege in the form of fines, restructuring
-          mandates, and data governance rules that erased more than $600 billion in market value from Chinese tech at its
-          peak. The stock fell from over $300 to under $70. The market concluded the story was over.</p>
+        <p class="pillar-copy">Most investors who ignore clothing retail would be surprised to learn that Lululemon's
+          gross margin sits above 58 percent — higher than Apple's in some quarters, and nearly 15 points above Nike.
+          This is not a conventional retailer. It is a vertically integrated, direct-to-consumer brand with full control
+          over pricing, distribution, and the customer relationship. It does not wholesale. It does not discount. Its
+          return on equity has not dipped below 20 percent in over a decade. Its 28 million members return at a rate of
+          89 to 92 percent. These facts, taken together with the market's near-consensus pessimism about LULU's
+          prospects, pointed to one of two conclusions. In 2026, the market was pricing this business at 11 times
+          earnings against a 10-year average multiple above 42. Either LULU was a broken company or a deeply
+          misread one.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">02</span>
-        <h3 class="pillar-heading">The<br>Distinction</h3>
+        <h3 class="pillar-heading">The<br>Misread</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">It was not. Alibaba remained the dominant infrastructure layer of Chinese commerce —
-          e-commerce, cloud, logistics, payments — with no credible domestic challenger. 
-          The regulatory crackdown was painful, but it was political, not structural. China at its core is a
-          pro-business regime. It needs its private sector. The question was never whether the relationship would
-          normalize — it was when. For a long-term investor, that question did not matter. The position was initiated on
-          May 20, 2024, at $87.56 — at all-time lows. Peak fear had created the entry.</p>
+        <p class="pillar-copy">The surface narrative in 2025 and 2026 was straightforward: North American growth had
+          slowed, product assortment had grown stale, and consumer spending was under pressure. The stock fell
+          accordingly from highs above $500 to under $150. Yet the market was overlooking Lululemon's balance sheet.
+          Tangible book value per share had doubled over three years. Cash holdings of approximately $1.5 billion sat
+          alongside negligible financial debt. Michael Burry, famed 'Big Short' investor, having reviewing the same
+          financials, noted it was among the least pessimistic sell-side consensuses he had seen for a company in that
+          financial condition. China revenue, meanwhile, continued growing at double digits. For patient value
+          investors,
+          the fundamentals were unequivocably telling a different story.</p>
       </div>
 
       <div class="case-pillar">
         <span class="pillar-num">03</span>
-        <h3 class="pillar-heading">The<br>Pivot</h3>
+        <h3 class="pillar-heading">The<br>Conviction</h3>
         <div class="pillar-rule"></div>
-        <p class="pillar-copy">The AI development was not the thesis, but a windfall bonus. Alibaba's Qwen launched
-          publicly in September 2023 and by 2025 had become one of the most downloaded open-source model series in the
-          world. In February 2025, Jack Ma appeared at a meeting with President Xi Jinping alongside China's leading
-          entrepreneurs: a visible signal of rehabilitation. A partial position was exited on September 17, 2025 at
-          $166.42. The remaining position reflects continued conviction that the repricing of Alibaba's full value has
-          not yet run its course.</p>
+        <p class="pillar-copy">Lululemon has survived the death of its founder's vision, a pandemic, a CEO departure,
+          and now a prolonged consumer spending drought — and through all of it, 28 million people kept showing up.
+          This brand continues to prove the market wrong about its stickiness. The position was initiated on April 26,
+          2026, at $143.80. When the stock declined further, a second tranche was added on June 18, 2026, at $111.84. We
+          feel comfortable about our margin of safety entering at these low prices for a quality company. A business
+          with negligible debt, $1.5 billion in cash, 89 percent customer retention, and a still-nascent international
+          footprint does not deserve to trade at distressed multiples. The market continues to offer us the opportunity
+          to own one of the most defensible consumer brands of the last two decades, and we will oblige.</p>
       </div>
 
     </div>
   </section>
 
-  <div class="visual-moment visual-moment-close">
-    <img src="baba1.jpg" alt="Alibaba Group" style="object-position: center 70%;">
-  </div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <script>
-    const ENTRY_DATE = '5/20/2024';
-    const ENTRY_PRICE = 87.56;
-    const EXIT_DATE = '9/17/2025';
-    const EXIT_PRICE = 166.42;
-    const START_DATE = '1/1/2019';
+    const ENTRY_DATE_1 = '4/26/2026';
+    const ENTRY_PRICE_1 = 143.80;
+    const ENTRY_DATE_2 = '6/18/2026';
+    const ENTRY_PRICE_2 = 111.84;
+    const START_DATE = '1/1/2023';
 
     const KEY_EVENTS = [
-      { date: '10/24/2020', title: 'Jack Ma criticizes regulators', color: '#c97c6a', labelBelow: false },
-      { date: '12/23/2020', title: 'Ant Group IPO halted', color: '#c97c6a', labelRight: true },
-      { date: '9/12/2023', title: 'Qwen launches publicly', color: '#6a9fd8' },
-      { date: '2/17/2025', title: 'Jack Ma meets Xi Jinping', color: '#6a9fd8' },
+      { date: '12/29/2023', title: 'LULU all-time high',              color: '#6a9fd8', labelAbove: true  },
+      { date: '3/22/2024',  title: 'US growth warning',               color: '#c97c6a', labelAbove: false },
+      { date: '5/21/2024',  title: 'Chief Product Officer departs',   color: '#c97c6a', labelAbove: true  },
+      { date: '12/12/2025', title: 'CEO steps down',                  color: '#c97c6a', labelAbove: true  },
     ];
 
     let allDates = [], allPrices = [];
@@ -413,7 +474,7 @@
         const xAxis = chart.scales.x;
         const yAxis = chart.scales.y;
 
-        // Key events
+        // Key event squares
         KEY_EVENTS.forEach(e => {
           const idx = findDateIdx(e.date);
           if (idx === -1) return;
@@ -431,76 +492,51 @@
           ctx.fillRect(xPos - size, priceY - size, size * 2, size * 2);
           ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 1.5;
           ctx.strokeRect(xPos - size, priceY - size, size * 2, size * 2);
-          ctx.font = '500 10px sans-serif'; ctx.globalAlpha = 1;
+          const labelY = e.labelAbove ? priceY - size - 6 : priceY + size + 14;
+          ctx.font = '500 10px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
           ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 3; ctx.lineJoin = 'round';
-          if (e.labelRight) {
-            ctx.textAlign = 'left';
-            ctx.strokeText(e.title.toUpperCase(), xPos + size + 8, priceY + 4);
-            ctx.fillStyle = e.color; ctx.globalAlpha = 0.85;
-            ctx.fillText(e.title.toUpperCase(), xPos + size + 8, priceY + 4);
-          } else {
-            ctx.textAlign = 'center';
-            ctx.strokeText(e.title.toUpperCase(), xPos, priceY - size - 6);
-            ctx.fillStyle = e.color; ctx.globalAlpha = 0.85;
-            ctx.fillText(e.title.toUpperCase(), xPos, priceY - size - 6);
-          }
+          ctx.strokeText(e.title.toUpperCase(), xPos, labelY);
+          ctx.fillStyle = e.color; ctx.globalAlpha = 0.85;
+          ctx.fillText(e.title.toUpperCase(), xPos, labelY);
           ctx.restore();
         });
 
-        // Entry
-        const entryIdx = findDateIdx(ENTRY_DATE);
-        if (entryIdx !== -1) {
+        // Entry dots — both #00ff88, labels placed left of dot (near right edge)
+        function drawEntry(dateStr, price, label) {
+          const idx = findDateIdx(dateStr);
+          if (idx === -1) return;
           let xPos;
-          try { xPos = xAxis.getPixelForValue(allDates[entryIdx]); } catch (e) { return; }
-          if (xPos !== undefined && !isNaN(xPos) && xPos >= xAxis.left - 1 && xPos <= xAxis.right + 1) {
-            const priceY = yAxis.getPixelForValue(allPrices[entryIdx]);
-            ctx.save();
-            ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
-            ctx.fillStyle = '#00ff88'; ctx.globalAlpha = 1; ctx.fill();
-            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 2; ctx.stroke();
-            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
-            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
-            ctx.strokeText('$87.56', xPos, priceY - 28);
-            ctx.fillStyle = '#00ff88'; ctx.fillText('$87.56', xPos, priceY - 28);
-            ctx.font = '700 12px sans-serif';
-            ctx.strokeText('ENTRY', xPos, priceY - 14);
-            ctx.fillText('ENTRY', xPos, priceY - 14);
-            ctx.restore();
-          }
+          try { xPos = xAxis.getPixelForValue(allDates[idx]); } catch (e) { return; }
+          if (xPos === undefined || isNaN(xPos)) return;
+          if (xPos < xAxis.left - 1 || xPos > xAxis.right + 1) return;
+          const priceY = yAxis.getPixelForValue(price);
+          ctx.save();
+          ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
+          ctx.fillStyle = '#00ff88'; ctx.globalAlpha = 1; ctx.fill();
+          ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 2; ctx.stroke();
+          ctx.font = '800 17px sans-serif'; ctx.textAlign = 'right'; ctx.globalAlpha = 1;
+          ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
+          ctx.strokeText('$' + price.toFixed(2), xPos - 18, priceY + 16);
+          ctx.fillStyle = '#00ff88'; ctx.fillText('$' + price.toFixed(2), xPos - 18, priceY + 16);
+          ctx.font = '700 12px sans-serif';
+          ctx.strokeText(label, xPos - 18, priceY + 32);
+          ctx.fillText(label, xPos - 18, priceY + 32);
+          ctx.restore();
         }
 
-        // Partial exit
-        const exitIdx = findDateIdx(EXIT_DATE);
-        if (exitIdx !== -1) {
-          let xPos;
-          try { xPos = xAxis.getPixelForValue(allDates[exitIdx]); } catch (e) { return; }
-          if (xPos !== undefined && !isNaN(xPos) && xPos >= xAxis.left - 1 && xPos <= xAxis.right + 1) {
-            const priceY = yAxis.getPixelForValue(EXIT_PRICE);
-            ctx.save();
-            ctx.beginPath(); ctx.arc(xPos, priceY, 10, 0, Math.PI * 2);
-            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 1; ctx.fill();
-            ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.stroke();
-            ctx.font = '800 17px sans-serif'; ctx.textAlign = 'center'; ctx.globalAlpha = 1;
-            ctx.strokeStyle = '#0a0a0a'; ctx.lineWidth = 4; ctx.lineJoin = 'round';
-            ctx.strokeText('$166.42', xPos, priceY - 16);
-            ctx.fillStyle = '#ff6b35'; ctx.fillText('$166.42', xPos, priceY - 16);
-            ctx.font = '700 12px sans-serif';
-            ctx.strokeText('PARTIAL EXIT', xPos, priceY + 24);
-            ctx.fillStyle = '#ff6b35'; ctx.globalAlpha = 0.9; ctx.fillText('PARTIAL EXIT', xPos, priceY + 24);
-            ctx.restore();
-          }
-        }
+        drawEntry(ENTRY_DATE_1, ENTRY_PRICE_1, 'T1 ENTRY');
+        drawEntry(ENTRY_DATE_2, ENTRY_PRICE_2, 'T2 ENTRY');
       }
     };
 
     Chart.register(verticalLinePlugin);
 
-    Papa.parse('baba_prices.csv', {
+    Papa.parse('lulu_prices.csv', {
       download: true,
       header: false,
       complete: function (results) {
         const cutoff = new Date(START_DATE);
-        results.data.slice(1).forEach(row => {
+        results.data.slice(3).forEach(row => {
           if (!row[0] || !row[1]) return;
           const d = parseDate(row[0]);
           const p = parseFloat(row[1]);
@@ -510,7 +546,14 @@
           allPrices.push(p);
         });
 
-        const ctx = document.getElementById('babaChart').getContext('2d');
+        if (allPrices.length) {
+          const lastPrice = allPrices[allPrices.length - 1];
+          const lastDate = allDates[allDates.length - 1];
+          document.getElementById('current-date').textContent = lastDate;
+          document.getElementById('current-price').textContent = '$' + lastPrice.toFixed(2);
+        }
+
+        const ctx = document.getElementById('luluChart').getContext('2d');
         new Chart(ctx, {
           type: 'line',
           data: {
@@ -550,7 +593,7 @@
       casePillars.forEach((pillar, i) => {
         const rect = pillar.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.65 && rect.bottom > 0) {
-          setTimeout(() => pillar.classList.add('visible'), i * 200);
+          setTimeout(() => pillar.classList.add('visible'), i * 300);
         } else {
           pillar.classList.remove('visible');
         }
