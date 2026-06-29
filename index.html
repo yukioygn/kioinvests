@@ -108,6 +108,7 @@
       object-fit: cover;
       object-position: center;
       filter: saturate(0) brightness(0.45);
+      transition: opacity 1.2s ease;
     }
 
     .hero-overlay {
@@ -447,7 +448,7 @@
 
     .carousel-track {
       display: flex;
-      transition: transform 1.5s var(--ease-out);
+      transition: transform 0.7s var(--ease-out);
       will-change: transform;
     }
 
@@ -691,10 +692,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <video class="hero-video" id="heroA" autoplay muted playsinline>
-      <source src="rocks.mp4" type="video/mp4">
-    </video>
-    <video class="hero-video" id="heroB" muted playsinline>
+    <video class="hero-video" id="heroA" autoplay muted playsinline loop>
       <source src="rocks.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -932,30 +930,47 @@
       else if (window.scrollY <= 80) nav.classList.remove('visible');
     });
 
-    // Hero video crossfade loop
+    // Hero video fade-to-black loop
     const heroA = document.getElementById('heroA');
-    const heroB = document.getElementById('heroB');
-    let activeHero = heroA;
-    let inactiveHero = heroB;
-    heroB.style.opacity = '0';
+    let fadingOut = false, fadingIn = true;
 
-    function setupHeroCrossfade(vid) {
-      vid.addEventListener('timeupdate', () => {
-        if (vid !== activeHero) return;
-        if (vid.duration && vid.currentTime >= vid.duration - 1.5) {
-          inactiveHero.currentTime = 0;
-          inactiveHero.play().catch(() => { });
-          inactiveHero.style.opacity = '1';
-          activeHero.style.opacity = '0';
-          const temp = activeHero;
-          activeHero = inactiveHero;
-          inactiveHero = temp;
-        }
-      });
-    }
+    // Initial reveal: start dark, then fade in
+    heroA.style.opacity = '0';
+    heroA.style.transition = 'none';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      heroA.style.transition = 'opacity 2.2s ease';
+      heroA.style.opacity = '1';
+      setTimeout(() => {
+        heroA.style.transition = 'opacity 1.2s ease';
+        fadingIn = false;
+      }, 2300);
+    }));
 
-    setupHeroCrossfade(heroA);
-    setupHeroCrossfade(heroB);
+    heroA.addEventListener('timeupdate', () => {
+      if (!heroA.duration) return;
+      const remaining = heroA.duration - heroA.currentTime;
+
+      // Begin fade to black ~1.5s before the loop point
+      if (!fadingOut && !fadingIn && remaining <= 1.5) {
+        fadingOut = true;
+        heroA.style.opacity = '0';
+      }
+
+      // Video has looped — fade back in
+      if (fadingOut && heroA.currentTime < 0.5) {
+        fadingOut = false;
+        fadingIn = true;
+        setTimeout(() => {
+          heroA.style.transition = 'opacity 2.2s ease';
+          heroA.style.opacity = '1';
+          setTimeout(() => {
+            heroA.style.transition = 'opacity 1.2s ease';
+            fadingIn = false;
+          }, 2300);
+        }, 2080);
+      }
+    });
+
     heroA.play();
 
     // Ink smoke effect (WebGL)
@@ -1203,11 +1218,9 @@
     const tickersWrap = document.getElementById('progressTickers');
     const total = cards.length;
     let current = 3;
-    let startX = 0;
-    let isDragging = false;
-    let dragDistance = 0;
 
     const tickers = ['SOC', 'EWBC', 'NBR', 'GOOGL', 'BABA', 'LULU', 'UEC'];
+    const cardLinks = ['soc.html', 'ewbc.html', 'nbr.html', 'googl.html', 'baba.html', 'lulu.html', 'uec.html'];
 
     tickers.forEach((t, i) => {
       const el = document.createElement('span');
@@ -1217,79 +1230,99 @@
       tickersWrap.appendChild(el);
     });
 
-    function updateCarousel() {
+    function getOffset(index) {
       const cardWidth = cards[0].offsetWidth;
-      const offset = (window.innerWidth / 2) - (cardWidth / 2) - (current * cardWidth);
-      track.style.transform = `translateX(${offset}px)`;
+      return (window.innerWidth / 2) - (cardWidth / 2) - (index * cardWidth);
+    }
 
+    function updateCards(idx) {
       cards.forEach((card, i) => {
         card.classList.remove('active', 'side', 'hidden');
-        if (i === current) card.classList.add('active');
-        else if (Math.abs(i - current) === 1) card.classList.add('side');
+        if (i === idx) card.classList.add('active');
+        else if (Math.abs(i - idx) === 1) card.classList.add('side');
         else card.classList.add('hidden');
       });
-
-      progressBar.style.width = `${((current + 1) / total) * 100}%`;
-
+      progressBar.style.width = `${((idx + 1) / total) * 100}%`;
       document.querySelectorAll('.progress-ticker').forEach((el, i) => {
-        el.classList.toggle('active', i === current);
+        el.classList.toggle('active', i === idx);
       });
     }
 
-    function goTo(index) {
+    function goTo(index, animate = true) {
       current = Math.max(0, Math.min(total - 1, index));
-      updateCarousel();
+      track.style.transition = animate ? 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+      track.style.transform = `translateX(${getOffset(current)}px)`;
+      updateCards(current);
     }
 
+    // Mouse drag — live tracking
+    let dragStartX = 0, dragStartOffset = 0, dragging = false, hasMoved = false;
+
     track.addEventListener('mousedown', e => {
-      startX = e.clientX;
-      isDragging = true;
-      dragDistance = 0;
+      dragStartX = e.clientX;
+      dragStartOffset = getOffset(current);
+      dragging = true;
+      hasMoved = false;
+      track.style.transition = 'none';
+      e.preventDefault();
     });
-    track.addEventListener('mousemove', e => {
-      if (isDragging) dragDistance = Math.abs(e.clientX - startX);
+
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - dragStartX;
+      if (Math.abs(dx) > 4) hasMoved = true;
+      track.style.transform = `translateX(${dragStartOffset + dx}px)`;
     });
-    track.addEventListener('mouseup', e => {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) {
-        goTo(diff > 0 ? current + 1 : current - 1);
-      } else if (dragDistance < 5 && current === 0) {
-        window.location.href = 'soc.html';
-      } else if (dragDistance < 5 && current === 1) {
-        window.location.href = 'ewbc.html';
-      } else if (dragDistance < 5 && current === 2) {
-        window.location.href = 'nbr.html';
-      } else if (dragDistance < 5 && current === 3) {
-        window.location.href = 'googl.html';
-      } else if (dragDistance < 5 && current === 4) {
-        window.location.href = 'baba.html';
-      } else if (dragDistance < 5 && current === 5) {
-        window.location.href = 'lulu.html';
-      } else if (dragDistance < 5 && current === 6) {
-        window.location.href = 'uec.html';
+
+    window.addEventListener('mouseup', e => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = e.clientX - dragStartX;
+      if (!hasMoved) {
+        if (cardLinks[current]) window.location.href = cardLinks[current];
+      } else if (Math.abs(dx) > 60) {
+        goTo(dx < 0 ? current + 1 : current - 1);
+      } else {
+        goTo(current);
       }
     });
-    track.addEventListener('mouseleave', () => { isDragging = false; });
 
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend', e => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    // Touch — live tracking
+    let touchStartX = 0, touchStartOffset = 0;
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartOffset = getOffset(current);
+      track.style.transition = 'none';
     }, { passive: true });
 
-    // Scroll wheel / trackpad
-    let scrollCooldown = false;
+    track.addEventListener('touchmove', e => {
+      const dx = e.touches[0].clientX - touchStartX;
+      track.style.transform = `translateX(${touchStartOffset + dx}px)`;
+    }, { passive: true });
+
+    track.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 60) goTo(dx < 0 ? current + 1 : current - 1);
+      else goTo(current);
+    }, { passive: true });
+
+    // Trackpad / wheel — accumulate delta, advance per card
+    let wheelAccum = 0, wheelLocked = false, wheelIdleTimer = null;
     track.addEventListener('wheel', e => {
       const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
       if (!isHorizontal) return;
       e.preventDefault();
-      if (scrollCooldown) return;
-      scrollCooldown = true;
-      if (e.deltaX > 5) goTo(current + 1);
-      if (e.deltaX < -5) goTo(current - 1);
-      setTimeout(() => { scrollCooldown = false; }, 500);
+      clearTimeout(wheelIdleTimer);
+      wheelIdleTimer = setTimeout(() => { wheelAccum = 0; }, 300);
+      if (wheelLocked) return;
+      wheelAccum += e.deltaX;
+      if (Math.abs(wheelAccum) > 80) {
+        const dir = wheelAccum > 0 ? 1 : -1;
+        wheelAccum = 0;
+        wheelLocked = true;
+        goTo(current + dir);
+        setTimeout(() => { wheelLocked = false; }, 750);
+      }
     }, { passive: false });
 
     document.addEventListener('keydown', e => {
@@ -1303,8 +1336,8 @@
       });
     });
 
-    updateCarousel();
-    window.addEventListener('resize', updateCarousel);
+    goTo(current, false);
+    window.addEventListener('resize', () => goTo(current, false));
   </script>
 
 </body>

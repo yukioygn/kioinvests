@@ -71,7 +71,7 @@
     .case-header p {
       font-size: 1.05rem;
       color: rgba(255, 255, 255, 0.5);
-      max-width: 580px;
+      white-space: nowrap;
     }
 
     .metrics-row {
@@ -85,6 +85,7 @@
       flex: 1;
       padding: 1.5rem 2.5rem;
       background: #0a0a0a;
+      box-sizing: border-box;
     }
 
     .metrics-row .metric:first-child {
@@ -321,11 +322,11 @@
 
   <nav>
     <a href="index.html" class="logo">KIO INVESTS</a>
-    <a href="index.html" class="back-link">← All cases</a>
+    <a href="index.html#cases" class="back-link">← All cases</a>
   </nav>
 
   <div class="case-header">
-    <p class="case-label">LULU · Active Position · 2026–</p>
+    <p class="case-label">LULU · Active Position · 2026 –</p>
     <h1>Lululemon Athletica</h1>
     <p>A community misread as a stumbling brand.</p>
   </div>

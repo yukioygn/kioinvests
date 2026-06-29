@@ -71,7 +71,7 @@
     .case-header p {
       font-size: 1.05rem;
       color: rgba(255, 255, 255, 0.5);
-      max-width: 580px;
+      white-space: nowrap;
     }
 
     .metrics-row {
@@ -85,6 +85,7 @@
       flex: 1;
       padding: 1.5rem 2.5rem;
       background: #0a0a0a;
+      box-sizing: border-box;
     }
 
     .metrics-row .metric:first-child {
@@ -324,11 +325,11 @@
 
   <nav>
     <a href="index.html" class="logo">KIO INVESTS</a>
-    <a href="index.html" class="back-link">← All cases</a>
+    <a href="index.html#cases" class="back-link">← All cases</a>
   </nav>
 
   <div class="case-header">
-    <p class="case-label">UEC · Speculation · 2021–2023</p>
+    <p class="case-label">UEC · Speculation · 2021 – 2023</p>
     <h1>Uranium Energy Corp</h1>
     <p>Uranium at cycle lows as US energy diversification made a nuclear renaissance inevitable</p>
   </div>
