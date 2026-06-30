@@ -83,7 +83,7 @@
     }
 
     .nav-links {
-      margin-right: 6rem;
+      margin-right: 0;
     }
 
     .nav-links a:hover {
@@ -176,7 +176,7 @@
     /* ── Eyebrow labels ── */
     .eyebrow {
       font-family: var(--sans);
-      font-size: 1.2rem;
+      font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-dim);
@@ -288,10 +288,10 @@
       position: relative;
       display: flex;
       align-items: flex-end;
-      justify-content: space-between;
-      padding: 10vh 8rem 10vh 16%;
+      justify-content: center;
+      gap: 8rem;
+      padding: 10vh 4rem;
       overflow: hidden;
-      gap: 4rem;
     }
 
     .waterfall-bg {
@@ -312,10 +312,50 @@
       pointer-events: none;
     }
 
+    .sound-toggle {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(232, 230, 224, 0.4);
+      background: rgba(10, 10, 10, 0.3);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .sound-toggle:hover {
+      background: rgba(232, 230, 224, 0.08);
+      border-color: rgba(232, 230, 224, 0.8);
+    }
+
+    .sound-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .sound-icon-on {
+      display: none;
+    }
+
+    .sound-toggle[aria-pressed="true"] .sound-icon-off {
+      display: none;
+    }
+
+    .sound-toggle[aria-pressed="true"] .sound-icon-on {
+      display: block;
+    }
+
     .philosophy-text-side {
       position: relative;
       z-index: 2;
-      max-width: 540px;
+      max-width: 520px;
     }
 
     .philosophy-body {
@@ -323,7 +363,7 @@
       font-size: 1.05rem;
       line-height: 1.95;
       color: rgba(232, 230, 224, 0.85);
-      text-align: justify;
+      text-align: left;
       margin-bottom: 2rem;
     }
 
@@ -334,13 +374,13 @@
       color: rgba(232, 230, 224, 0.55);
       margin-bottom: 2rem;
       display: block;
-      text-align: justify;
+      text-align: left;
     }
 
     .philosophy-img-side {
       position: relative;
       z-index: 2;
-      flex: 1;
+      flex: 0 0 480px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -404,7 +444,7 @@
       font-style: italic;
       line-height: 1.15;
       margin-bottom: 1.8rem;
-      color: #ffffff;
+      color: var(--text);
     }
 
     .pillar-rule {
@@ -424,8 +464,8 @@
       font-family: var(--serif);
       font-size: 0.95rem;
       line-height: 1.9;
-      color: rgba(232, 230, 224, 0.38);
-      text-align: justify;
+      color: rgba(232, 230, 224, 0.5);
+      text-align: left;
       transition: color 0.6s ease;
     }
 
@@ -534,7 +574,7 @@
       font-weight: 400;
       color: var(--text);
       margin-bottom: 0.5rem;
-      line-height: 2.0;
+      line-height: 1.15;
     }
 
     .case-card-desc {
@@ -567,10 +607,9 @@
 
     .progress-ticker {
       font-family: var(--sans);
-      font-size: 1.2rem;
+      font-size: 0.85rem;
       letter-spacing: 0.1em;
       color: rgba(255, 255, 255, 0.2);
-      transition: color 0.4s ease;
       cursor: pointer;
       padding-bottom: 4px;
       border-bottom: 0.5px solid transparent;
@@ -584,10 +623,7 @@
 
     /* ── Lineage ── */
     .lineage-section {
-      padding-top: 32vh;
-      padding-bottom: 0;
-      padding-left: 4rem;
-      padding-right: 4rem;
+      padding: 18vh 4rem 2.5rem;
       text-align: center;
       border-top: 0.5px solid var(--border);
     }
@@ -604,10 +640,8 @@
 
     /* ── Invitation ── */
     .invitation-section {
-      padding: 0 4rem 22vh;
+      padding: 0 4rem 20vh;
       text-align: center;
-      border-top: none;
-      margin-top: -1vh;
     }
 
     .invitation-headline {
@@ -699,7 +733,7 @@
     <div class="hero-content">
       <p class="hero-brand">Kio Invests</p>
       <h1 class="hero-character">靜</h1>
-      <p class="hero-tagline">Patient Capital | Uncommon Stillness</p>
+      <p class="hero-tagline">Patient Capital · Uncommon Stillness</p>
       <a href="#contact" class="hero-cta">Inquire</a>
     </div>
   </section>
@@ -741,6 +775,18 @@
         <img src="tt6.png" alt="Black Tortoise artifact" class="philosophy-tortoise-img">
       </div>
     </div>
+    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Toggle waterfall sound">
+      <svg class="sound-icon sound-icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="3,9 8,9 13,4 13,20 8,15 3,15" fill="currentColor" stroke="none"></polygon>
+        <line x1="16" y1="9" x2="22" y2="15"></line>
+        <line x1="22" y1="9" x2="16" y2="15"></line>
+      </svg>
+      <svg class="sound-icon sound-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="3,9 8,9 13,4 13,20 8,15 3,15" fill="currentColor" stroke="none"></polygon>
+        <path d="M16 8.5a5 5 0 0 1 0 7"></path>
+        <path d="M18.5 6a8.5 8.5 0 0 1 0 12"></path>
+      </svg>
+    </button>
 
   </section>
 
@@ -752,7 +798,6 @@
     <div class="pillars-grid">
 
       <div class="pillar fade-in">
-        <span class="pillar-num">01</span>
         <h3 class="pillar-title">Variant<br>Perception</h3>
         <div class="pillar-rule"></div>
         <p class="pillar-body">The wisdom of crowds is real. So is its madness. Euphoria inflates what reason cannot
@@ -761,7 +806,6 @@
       </div>
 
       <div class="pillar fade-in" style="transition-delay: 0.15s;">
-        <span class="pillar-num">02</span>
         <h3 class="pillar-title">Patient<br>Capital</h3>
         <div class="pillar-rule"></div>
         <p class="pillar-body">Time is the mechanism through which the market corrects its own errors. We do not trade.
@@ -770,7 +814,6 @@
       </div>
 
       <div class="pillar fade-in" style="transition-delay: 0.30s;">
-        <span class="pillar-num">03</span>
         <h3 class="pillar-title">Asymmetric<br>Risk</h3>
         <div class="pillar-rule"></div>
         <p class="pillar-body">The goal is never to avoid risk. It is to find situations where the downside is bounded
