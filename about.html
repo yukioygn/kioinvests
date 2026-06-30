@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Kio Invests</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @font-face {
+      font-family: 'HanyiSenty';
+      src: url('Hanyi Senty Vimalakirti Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e8e6e0;
+      font-family: 'Georgia', serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav (matches case-study page pattern) ── */
+    nav {
+      padding: 1rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-family: system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: #e8e6e0;
+      text-decoration: none;
+    }
+
+    .back-link {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #e8e6e0;
+    }
+
+    /* ── Two-zone layout ── */
+    .frame {
+      display: flex;
+    }
+
+    .strip {
+      position: sticky;
+      top: 0;
+      width: 20vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #050505;
+      border-right: 0.5px solid rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .glyph {
+      font-family: 'HanyiSenty', serif;
+      font-size: 13vw;
+      color: #e8e6e0;
+      line-height: 1;
+      -webkit-mask-image: linear-gradient(to top, #000 calc(var(--pct, 4) * 1%), transparent calc(var(--pct, 4) * 1% + 10%));
+      mask-image: linear-gradient(to top, #000 calc(var(--pct, 4) * 1%), transparent calc(var(--pct, 4) * 1% + 10%));
+    }
+
+    .main {
+      width: 80vw;
+    }
+
+    /* ── Manifesto beats ── */
+    .beat {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4rem;
+    }
+
+    .beat.indent-1 { padding-left: 4rem; }
+    .beat.indent-2 { padding-left: 9rem; }
+    .beat.indent-3 { padding-left: 4rem; }
+
+    .opener {
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(3rem, 6.5vw, 5.8rem);
+      line-height: 1.1;
+      max-width: 15ch;
+      color: #e8e6e0;
+    }
+
+    .line {
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1.9rem, 3.8vw, 3rem);
+      line-height: 1.2;
+      max-width: 17ch;
+      color: #e8e6e0;
+    }
+
+    .line.small {
+      font-size: clamp(1.3rem, 2.3vw, 1.7rem);
+      color: rgba(232, 230, 224, 0.55);
+      max-width: 24ch;
+      line-height: 1.55;
+    }
+
+    .closing-label {
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232, 230, 224, 0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .closing a {
+      display: inline-block;
+      color: #e8e6e0;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      text-decoration: none;
+      border-bottom: 0.5px solid rgba(232, 230, 224, 0.3);
+    }
+
+    /* ── Footer (matches index.html exactly) ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      color: rgba(232, 230, 224, 0.25);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      .strip {
+        display: none;
+      }
+      .main {
+        width: 100vw;
+      }
+      .beat.indent-1, .beat.indent-2, .beat.indent-3 {
+        padding-left: 4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="frame">
+    <div class="strip">
+      <div class="glyph" id="glyph">靜</div>
+    </div>
+
+    <div class="main">
+      <nav>
+        <a href="index.html" class="logo">KIO INVESTS</a>
+        <a href="index.html" class="back-link">← Home</a>
+      </nav>
+
+      <div class="beat indent-1">
+        <h1 class="opener">Most capital is managed by people paid to do something.</h1>
+      </div>
+
+      <div class="beat indent-2">
+        <p class="line">We hold few positions, and we hold them for a long time.</p>
+      </div>
+
+      <div class="beat indent-1">
+        <p class="line small">Not because we are slow — because conviction takes years to be vindicated, and we are willing to wait for the vindication rather than the applause.</p>
+      </div>
+
+      <div class="beat indent-3">
+        <p class="line">The work is mostly waiting.</p>
+      </div>
+
+      <div class="beat indent-1">
+        <p class="line small">No newsletter. No quarterly letter. No noise. If something changes, the case studies change. That is the only communication you should expect from us.</p>
+      </div>
+
+      <div class="beat indent-2 closing">
+        <p class="closing-label">Get in touch</p>
+        <a href="mailto:hello@kioinvests.com">hello@kioinvests.com</a>
+      </div>
+
+      <footer>Kio Invests © 2026</footer>
+    </div>
+  </div>
+
+  <script>
+    const glyph = document.getElementById('glyph');
+    function update() {
+      const max = document.body.scrollHeight - window.innerHeight;
+      const pct = Math.min(100, Math.max(4, (window.scrollY / max) * 100));
+      glyph.style.setProperty('--pct', pct);
+    }
+    document.addEventListener('scroll', update, { passive: true });
+    update();
+  </script>
+
+</body>
+
+</html>
