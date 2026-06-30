@@ -80,8 +80,8 @@
       font-size: 13vw;
       color: #e8e6e0;
       line-height: 1;
-      -webkit-mask-image: linear-gradient(to top, #000 calc(var(--pct, 4) * 1%), transparent calc(var(--pct, 4) * 1% + 10%));
-      mask-image: linear-gradient(to top, #000 calc(var(--pct, 4) * 1%), transparent calc(var(--pct, 4) * 1% + 10%));
+      filter: blur(calc((100 - var(--pct, 4)) * 0.18px)) brightness(calc(0.3 + var(--pct, 4) * 0.007));
+      opacity: calc(0.35 + var(--pct, 4) * 0.0065);
     }
 
     .main {
