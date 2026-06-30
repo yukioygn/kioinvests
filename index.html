@@ -1126,24 +1126,34 @@
     const audioB = document.getElementById('waterfallAudioB');
     audioA.volume = 0;
     audioB.volume = 0;
-    let audioUnlocked = false;
+    let soundEnabled = false;
     let waterfallVisible = false;
     let targetVolume = 0;
     let currentActive = audioA;
     let currentInactive = audioB;
     let crossfading = false;
 
-    function unlockAudio() {
-      if (audioUnlocked) return;
-      audioUnlocked = true;
-      audioA.load();
-      audioB.load();
-      if (waterfallVisible) fadeAudioIn();
-    }
+    const soundToggle = document.getElementById('soundToggle');
 
-    document.addEventListener('click', unlockAudio, { once: true });
-    document.addEventListener('scroll', unlockAudio, { once: true });
-    document.addEventListener('touchstart', unlockAudio, { once: true });
+    soundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+
+      if (soundEnabled) {
+        audioA.load();
+        audioB.load();
+        if (waterfallVisible) {
+          fadeAudioIn();
+        } else {
+          // Spend this click's user-gesture credit priming the audio element
+          // so a later, scroll-triggered (non-gesture) play() isn't blocked
+          // by the browser's autoplay-with-sound policy.
+          currentActive.play().then(() => currentActive.pause()).catch(() => { });
+        }
+      } else {
+        fadeAudioOut();
+      }
+    });
 
     function startCrossfadeLoop(audio) {
       audio.addEventListener('timeupdate', function () {
@@ -1211,7 +1221,7 @@
     const audioObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         waterfallVisible = entry.isIntersecting;
-        if (entry.isIntersecting && audioUnlocked) fadeAudioIn();
+        if (entry.isIntersecting && soundEnabled) fadeAudioIn();
         else fadeAudioOut();
       });
     }, { threshold: 0.5 });
