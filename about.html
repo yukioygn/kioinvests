@@ -265,7 +265,10 @@
     function update() {
       const max = document.body.scrollHeight - window.innerHeight;
       const pct = Math.min(100, Math.max(4, (window.scrollY / max) * 100));
-      glyph.style.setProperty('--pct', pct);
+      // Ease the reveal so it starts resolving noticeably earlier in the
+      // scroll, while still only reaching full clarity right at pct=100.
+      const eased = 100 * Math.sqrt(pct / 100);
+      glyph.style.setProperty('--pct', eased);
     }
     document.addEventListener('scroll', update, { passive: true });
     update();
