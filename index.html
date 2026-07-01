@@ -43,6 +43,29 @@
       line-height: 1.7;
     }
 
+    html, body {
+      cursor: none;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(232, 230, 224, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 90;
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cursor-ring.hover {
+      width: 36px;
+      height: 36px;
+      border-color: #e8e6e0;
+    }
+
     /* ── Navigation ── */
     .nav {
       padding: 1rem 4rem;
@@ -715,12 +738,14 @@
 
 <body>
 
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="/" class="nav-logo">KIO INVESTS</a>
+    <a href="/" class="nav-logo hoverable">KIO INVESTS</a>
     <div class="nav-links">
-      <a href="#cases">Cases</a>
-      <a href="about.html">About</a>
+      <a href="#cases" class="hoverable">Cases</a>
+      <a href="about.html" class="hoverable">About</a>
     </div>
   </nav>
 
@@ -734,7 +759,7 @@
       <p class="hero-brand">Kio Invests</p>
       <h1 class="hero-character">靜</h1>
       <p class="hero-tagline">Patient Capital · Uncommon Stillness</p>
-      <a href="#contact" class="hero-cta">Inquire</a>
+      <a href="#contact" class="hero-cta hoverable">Inquire</a>
     </div>
   </section>
 
@@ -775,7 +800,7 @@
         <img src="tt6.png" alt="Black Tortoise artifact" class="philosophy-tortoise-img">
       </div>
     </div>
-    <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Toggle waterfall sound">
+    <button class="sound-toggle hoverable" id="soundToggle" type="button" aria-pressed="false" aria-label="Toggle waterfall sound">
       <svg class="sound-icon sound-icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="3,9 8,9 13,4 13,20 8,15 3,15" fill="currentColor" stroke="none"></polygon>
         <line x1="16" y1="9" x2="22" y2="15"></line>
@@ -944,7 +969,7 @@
   <!-- Invitation -->
   <section class="invitation-section">
     <h2 class="invitation-headline fade-in">for those who think in years</h2>
-    <a href="mailto:hello@kioinvests.com" class="invitation-contact">hello@kioinvests.com</a>
+    <a href="mailto:hello@kioinvests.com" class="invitation-contact hoverable">hello@kioinvests.com</a>
   </section>
 
   <!-- Footer -->
@@ -1391,6 +1416,16 @@
 
     goTo(current, false);
     window.addEventListener('resize', () => goTo(current, false));
+
+    // Cursor ring — tracks instantly (no easing/lag), grows on hover
+    const cursorRing = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', (e) => {
+      cursorRing.style.transform = `translate(${e.clientX - 11}px, ${e.clientY - 11}px)`;
+    });
+    document.querySelectorAll('.hoverable').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
   </script>
 
 </body>
