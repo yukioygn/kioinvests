@@ -35,6 +35,29 @@
       mix-blend-mode: screen;
     }
 
+    html, body {
+      cursor: none;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(232, 230, 224, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 90;
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cursor-ring.hover {
+      width: 36px;
+      height: 36px;
+      border-color: #e8e6e0;
+    }
+
     /* ── Nav (matches case-study page pattern) ── */
     nav {
       padding: 1rem 4rem;
@@ -181,6 +204,7 @@
 <body>
 
   <canvas class="grain" id="grain"></canvas>
+  <div class="cursor-ring" id="cursorRing"></div>
 
   <div class="frame">
     <div class="strip">
@@ -189,8 +213,8 @@
 
     <div class="main">
       <nav>
-        <a href="index.html" class="logo">KIO INVESTS</a>
-        <a href="index.html" class="back-link">← Home</a>
+        <a href="index.html" class="logo hoverable">KIO INVESTS</a>
+        <a href="index.html" class="back-link hoverable">← Home</a>
       </nav>
 
       <div class="beat indent-1">
@@ -215,7 +239,7 @@
 
       <div class="beat indent-2 closing">
         <p class="closing-label">Get in touch</p>
-        <a href="mailto:hello@kioinvests.com">hello@kioinvests.com</a>
+        <a href="mailto:hello@kioinvests.com" class="hoverable">hello@kioinvests.com</a>
       </div>
 
       <footer>Kio Invests © 2026</footer>
@@ -263,6 +287,16 @@
       requestAnimationFrame(grainLoop);
     }
     requestAnimationFrame(grainLoop);
+
+    // Cursor ring — tracks instantly (no easing/lag), grows on hover
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', (e) => {
+      ring.style.transform = `translate(${e.clientX - 11}px, ${e.clientY - 11}px)`;
+    });
+    document.querySelectorAll('.hoverable').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
   </script>
 
 </body>
