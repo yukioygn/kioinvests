@@ -26,6 +26,15 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0.07;
+      mix-blend-mode: screen;
+    }
+
     /* ── Nav (matches case-study page pattern) ── */
     nav {
       padding: 1rem 4rem;
@@ -171,6 +180,8 @@
 
 <body>
 
+  <canvas class="grain" id="grain"></canvas>
+
   <div class="frame">
     <div class="strip">
       <div class="glyph" id="glyph">靜</div>
@@ -220,6 +231,38 @@
     }
     document.addEventListener('scroll', update, { passive: true });
     update();
+
+    // Film grain — screen blend mode stays visible on a near-black base,
+    // unlike overlay which compresses toward the base color when it's this dark.
+    const grainCanvas = document.getElementById('grain');
+    const gctx = grainCanvas.getContext('2d');
+    function resizeGrain() {
+      grainCanvas.width = window.innerWidth;
+      grainCanvas.height = window.innerHeight;
+    }
+    resizeGrain();
+    window.addEventListener('resize', resizeGrain);
+
+    function drawGrain() {
+      const w = grainCanvas.width, h = grainCanvas.height;
+      const imageData = gctx.createImageData(w, h);
+      const buffer = new Uint32Array(imageData.data.buffer);
+      for (let i = 0; i < buffer.length; i++) {
+        const shade = (Math.random() * 255) | 0;
+        buffer[i] = (255 << 24) | (shade << 16) | (shade << 8) | shade;
+      }
+      gctx.putImageData(imageData, 0, 0);
+    }
+
+    let lastGrainTime = 0;
+    function grainLoop(t) {
+      if (t - lastGrainTime > 100) {
+        drawGrain();
+        lastGrainTime = t;
+      }
+      requestAnimationFrame(grainLoop);
+    }
+    requestAnimationFrame(grainLoop);
   </script>
 
 </body>
