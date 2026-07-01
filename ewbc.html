@@ -19,6 +19,29 @@
       line-height: 1.7;
     }
 
+    html, body {
+      cursor: none;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(232, 230, 224, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 90;
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cursor-ring.hover {
+      width: 36px;
+      height: 36px;
+      border-color: #e8e6e0;
+    }
+
     nav {
       padding: 1rem 4rem;
       display: flex;
@@ -28,6 +51,7 @@
     }
 
     .logo {
+      font-family: system-ui, sans-serif;
       font-size: 1.1rem;
       letter-spacing: 0.08em;
       color: #e8e6e0;
@@ -37,11 +61,11 @@
     .back-link {
       color: rgba(255, 255, 255, 0.4);
       text-decoration: none;
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.85rem;
       letter-spacing: 0.05em;
       transition: color 0.2s;
-      margin-right: 6rem;
+      margin-right: 0;
     }
 
     .back-link:hover {
@@ -54,7 +78,7 @@
     }
 
     .case-label {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       color: rgba(255, 255, 255, 0.35);
@@ -93,7 +117,7 @@
     }
 
     .metric-label {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       color: rgba(255, 255, 255, 0.3);
@@ -102,7 +126,7 @@
     }
 
     .metric-value {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 1.6rem;
       font-weight: 300;
       color: #e8e6e0;
@@ -113,7 +137,7 @@
     }
 
     .chart-label {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
       color: rgba(255, 255, 255, 0.3);
@@ -135,19 +159,19 @@
     }
 
     #current-date {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.35);
     }
 
     #current-price {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 1.1rem;
       color: #e8e6e0;
     }
 
     #current-return {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.35);
     }
@@ -245,7 +269,7 @@
     }
 
     .pillar-num {
-      font-family: sans-serif;
+      font-family: system-ui, sans-serif;
       font-size: 3rem;
       letter-spacing: 0.2em;
       color: rgba(255, 255, 255, 0.25);
@@ -288,9 +312,11 @@
 
 <body>
 
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <nav>
-    <a href="index.html" class="logo">KIO INVESTS</a>
-    <a href="index.html#cases" class="back-link">← All cases</a>
+    <a href="index.html" class="logo hoverable">KIO INVESTS</a>
+    <a href="index.html#cases" class="back-link hoverable">← All cases</a>
   </nav>
 
   <div class="case-header">
@@ -592,6 +618,16 @@
       pillar.addEventListener('mouseenter', () => {
         pillar.querySelector('.pillar-copy').style.color = 'rgba(255,255,255,1)';
       });
+    });
+
+    // Cursor ring — tracks instantly (no easing/lag), grows on hover
+    const cursorRing = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', (e) => {
+      cursorRing.style.transform = `translate(${e.clientX - 11}px, ${e.clientY - 11}px)`;
+    });
+    document.querySelectorAll('.hoverable').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
     });
   </script>
 
